@@ -1,0 +1,130 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+}
+
+nav {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    color: #ffffff;
+    margin:44px 47px 0 94px;
+}
+
+section {
+    &.slide {
+        height: 100vh;
+
+        &.hero {
+            color: #ffffff;
+            background-color: #386272;
+
+            & .left {
+                position: absolute;
+                top: 50%;
+                left: 6.3vw;
+                transform: translateY(-50%);
+                
+                & .event-date {
+                    font-size: 19px;
+                    font-weight: 900;
+                    margin-bottom: 25px;
+                }
+    
+                & .catchphrase {
+                    font-family: 'Cabin', sans-serif;
+                    letter-spacing: 4px;
+                    font-size: 75px;
+                    font-weight: bold;
+                    line-height: 0.93;
+                    margin-bottom: 50px;
+                }
+    
+                & .cta {
+                    width: 337px;
+                    height: 85px;
+                    background-color: #09aae2;
+                    line-height: 85px;
+                    text-align: center;
+                }
+            }
+
+            & .more {
+                position: absolute;
+                right: 40px;
+                top: 50%;
+                transform: rotate(90deg) translateX(50%);
+                transform-origin: right;
+            }
+
+            & .play {
+                position: absolute;
+                right: 80px;
+                top: 50%;
+            }
+        }
+
+        &.panel {
+            position: relative;
+
+            & .content {
+                position: absolute;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                top: 50%;
+                transform: translateY(-50%);
+                
+                & .title {
+                    flex: 1;          
+                    font-family: 'Cabin', sans-serif;
+                    letter-spacing: 2px;         
+                    font-size: 42px;
+                    font-weight: bold;
+                    line-height: 1.33;
+                    padding-left: 180px;
+                    padding-right: 90px;
+                }
+                
+                & .description {
+                    flex: 1;
+                    font-size: 24px;
+                    font-weight: 500;
+                    line-height: 2.08;
+                    padding-left: 90px;
+                    padding-right: 180px;
+
+                    & > div {
+                        margin-bottom: 2em;
+
+                        &:last-child {
+                            margin-bottom: 0em;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.panel-1 {
+            background-color: #fff;
+            color: #000;
+        }
+
+        &.panel-2 {
+            background-color: #967B43;
+            color: #fff;
+        }
+
+        &.panel-3 {
+            background-color: #12372F;
+            color: #fff;
+        }
+
+        &.panel-4 {
+            background-color: #967B43;
+            color: #fff;
+        }
+    }
+}
