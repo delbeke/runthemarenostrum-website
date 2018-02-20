@@ -1,11 +1,17 @@
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const minifyCSS = require('gulp-csso')
+const concat = require('gulp-concat')
+const sourcemaps = require('gulp-sourcemaps')
+const seq = require('gulp-sequence')
+const connect = require('gulp-connect')
 
-var gulp = require('gulp')
-var sass = require('gulp-sass')
-var minifyCSS = require('gulp-csso')
-var concat = require('gulp-concat')
-var sourcemaps = require('gulp-sourcemaps')
-var livereload = require('gulp-livereload')
-var seq = require('gulp-sequence')
+gulp.task('connect', () => {
+  connect.server({
+    root: 'build',
+    livereload: true
+  })
+})
 
 gulp.task('html', () => {
   return gulp.src('src/*.html')
@@ -28,12 +34,11 @@ gulp.task('js', () => {
 })
 
 gulp.task('reload', () => {
-  return gulp.src('src/**/*')
-    .pipe(livereload())
+  return gulp.src('src/*.html')
+    .pipe(connect.reload())
 })
 
-gulp.task('watch', () => {
-  livereload.listen()
+gulp.task('watch', ['connect', 'default'], () => {
   gulp.watch('src/**/*', () => {
     seq('default', 'reload')((err) => {
       if (err) {
