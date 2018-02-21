@@ -20,6 +20,10 @@ section {
         &.hero {
             color: #ffffff;
             background-color: #386272;
+            background-image: url(/images/hero.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center; 
 
             & .left {
                 position: absolute;

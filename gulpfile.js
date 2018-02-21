@@ -5,6 +5,9 @@ const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const seq = require('gulp-sequence')
 const connect = require('gulp-connect')
+const imagemin = require('gulp-imagemin')
+const imageResize = require('gulp-image-resize')
+const del = require('del')
 
 gulp.task('connect', () => {
   connect.server({
@@ -12,6 +15,17 @@ gulp.task('connect', () => {
     livereload: true
   })
 })
+
+gulp.task('clean', () => {
+  return del(['build/**/*'])
+})
+
+gulp.task('images', () =>
+  gulp.src('src/images/**/*')
+    .pipe(imageResize({ width: 1500, crop: false, upscale: false }))
+    .pipe(imagemin())
+    .pipe(gulp.dest('build/images'))
+)
 
 gulp.task('html', () => {
   return gulp.src('src/*.html')
@@ -48,4 +62,4 @@ gulp.task('watch', ['connect', 'default'], () => {
   })
 })
 
-gulp.task('default', ['html', 'css', 'js'])
+gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images'])(cb))
