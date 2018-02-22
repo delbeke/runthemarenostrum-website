@@ -71,7 +71,11 @@ section {
         }
 
         &.panel {
+            overflow: hidden;
             position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center; 
 
             & .content {
                 position: absolute;
@@ -118,16 +122,19 @@ section {
 
         &.panel-2 {
             background-color: #967B43;
+            background-image: url(/images/co-achieve.jpg);            
             color: #fff;
         }
 
         &.panel-3 {
             background-color: #12372F;
+            background-image: url(/images/co-create.jpg);                        
             color: #fff;
         }
 
         &.panel-4 {
             background-color: #967B43;
+            background-image: url(/images/co-inspire.jpg);                                    
             color: #fff;
         }
 
@@ -139,6 +146,10 @@ section {
         &.nutshell {
             position: relative;
             background-color: #D5EDEE;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center; 
+            background-image: url(/images/quote.jpg);                                    
 
             & > .container {
                 position: absolute;
@@ -146,8 +157,10 @@ section {
                 top: 50%;
                 transform: translateY(-50%);
                 padding-left: 180px;
+                max-width: calc(100% - 180px);
 
                 & > .tag {
+                    display: inline-block;
                     text-transform: uppercase;
                 }
 
@@ -157,7 +170,6 @@ section {
                     font-size: 42px;
                     font-weight: bold;
                     line-height: 1.33;
-                    max-width: calc(50% - 180px);
                 }
             }
         }
@@ -247,6 +259,10 @@ footer {
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-end;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-image: url(/images/footer.jpg);   
 
     & > div {
         margin-bottom: 31px;
