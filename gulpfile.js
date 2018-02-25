@@ -21,9 +21,14 @@ gulp.task('clean', () => {
 })
 
 gulp.task('images', () =>
-  gulp.src('src/images/**/*')
+  gulp.src('src/images/**/*.jpg')
     .pipe(imageResize({ width: 1500, crop: false, upscale: false }))
     .pipe(imagemin())
+    .pipe(gulp.dest('build/images'))
+)
+
+gulp.task('svg', () =>
+  gulp.src('src/images/*.svg')
     .pipe(gulp.dest('build/images'))
 )
 
@@ -62,4 +67,4 @@ gulp.task('watch', ['connect', 'default'], () => {
   })
 })
 
-gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images'])(cb))
+gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg'])(cb))

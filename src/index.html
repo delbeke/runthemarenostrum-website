@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>Run The Mare Nostrum</title>
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -9,9 +10,18 @@
 
 <body>
     <nav>
-        <div>Mare Nostrum</div>
-        <div>Register</div>
-        <div>Menu</div>
+        <div class='left'>Mare Nostrum</div>
+        <div class='right'>
+            <div>Register</div>
+            <div>
+                Menu
+                <div class='hamburger'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     </nav>
     <section class='slide hero'>
         <div class='left'>
@@ -21,13 +31,15 @@
                 <div>the european coast</div>
                 <div>together.</div>
             </div>
-            <div class='CTA'>Join now, pick your stage</div>
+            <div class='CTA'>Join now, pick your stage<span class='arrow'>➔</span></div>
         </div>
         <div class='play'>
+            <img src="/images/play.svg">
             What's Mare Nostrum?
         </div>
         <div class='more'>
             Scroll down for more
+            <div class='line'></div>
         </div>
     </section>
     <section class='slide panel panel-1'>
@@ -177,7 +189,7 @@
     </section>
     <footer>
         <div>Copyright © Mare Nostrum 2018</div>
-        <div>Webdesign by Cloud Studio.</div>
+        <div><a href='https://cloudstudio.gent/' target='_blank'>Webdesign by Cloud Studio.</a></div>
     </footer>
 </body>
 
