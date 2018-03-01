@@ -16,9 +16,18 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    line-height: 24px;
     &>.left {
         display: flex;
         flex-direction: row;
+        &>img {
+            width: 24px;
+            height: 24px;
+            margin-right: 24px;
+        }
+        &>span {
+            text-transform: uppercase;
+        }
     }
     &>.right {
         display: flex;
@@ -286,6 +295,32 @@ footer {
         &>a {
             color: #fff;
             text-decoration: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    html, body {
+        font-size: 40%;
+    }
+    section.slide.panel .content {
+        flex-direction: column;
+
+        & .title {
+            margin-bottom: 4rem;
+        }
+    }
+
+    section.slide.nutshell>.container>.title {
+        width: 80%;
+        margin-top: 4rem;
+    }
+
+    section.slide.nutshell {
+        background-image: url(/images/mobile/quote.jpg);
+        & >.container {
+            top: 20%;
+            transform: unset;
         }
     }
 }

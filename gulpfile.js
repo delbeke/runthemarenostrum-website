@@ -32,6 +32,11 @@ gulp.task('svg', () =>
     .pipe(gulp.dest('build/images'))
 )
 
+gulp.task('png', () =>
+  gulp.src('src/images/*.png')
+    .pipe(gulp.dest('build/images'))
+)
+
 gulp.task('html', () => {
   return gulp.src('src/*.html')
     .pipe(gulp.dest('build/'))
@@ -67,4 +72,4 @@ gulp.task('watch', ['connect', 'default'], () => {
   })
 })
 
-gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg'])(cb))
+gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png'])(cb))
