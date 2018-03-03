@@ -73,12 +73,17 @@ section {
                 & .catchphrase {
                     font-family: 'Cabin', sans-serif;
                     letter-spacing: 0.4rem;
-                    font-size: 7.5rem;
+                    font-size: 7rem;
                     font-weight: bold;
                     line-height: 0.93;
                     margin-bottom: 50px;
                     width: 60vw;
                 }
+
+                & > .play-mobile {
+                    display: none;
+                }
+
                 & .cta {
                     cursor: pointer;
                     width: 337px;
@@ -93,7 +98,7 @@ section {
                     }
                 }
             }
-            & .more {
+            & > .more {
                 position: absolute;
                 right: 40px;
                 top: 50%;
@@ -104,7 +109,7 @@ section {
                     width: 100px;
                 }
             }
-            & .play {
+            & > .play-desktop {
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -303,24 +308,78 @@ footer {
     html, body {
         font-size: 40%;
     }
-    section.slide.panel .content {
-        flex-direction: column;
 
-        & .title {
-            margin-bottom: 4rem;
+    section.slide {
+        &.hero {
+            & .left {
+                position: relative;
+                width: 90%;
+                padding: 100px 5% 0 5%;
+                transform: unset;
+                top: unset;
+                left: unset;
+
+                & .catchphrase {
+                    width: unset;
+                    margin-bottom: 180px;
+
+                    & > div {
+                        display: inline;
+                    }
+                }
+
+                & > .play-mobile {
+                    display: block;
+                    text-align: center;
+                    margin-bottom: 21px;
+
+                    & > img {
+                        width: 58px;
+                        height: 58px;
+                        vertical-align: middle;
+                        margin-right: 15px;
+                    }
+
+                    & > span {
+                        font-size: 2.8rem;
+                    }
+                }
+
+                & > .cta {
+                    font-size: 2.8rem;
+                    width: 100%;
+                }
+            }
+
+            & > .play-desktop {
+                display: none;
+            }
+
+            & > .more {
+                display: none;
+            }
         }
-    }
 
-    section.slide.nutshell>.container>.title {
-        width: 80%;
-        margin-top: 4rem;
-    }
-
-    section.slide.nutshell {
-        background-image: url(/images/mobile/quote.jpg);
-        & >.container {
-            top: 20%;
-            transform: unset;
+        &.panel .content {
+            flex-direction: column;
+    
+            & .title {
+                margin-bottom: 4rem;
+            }
         }
+
+        &.nutshell>.container>.title {
+            width: 80%;
+            margin-top: 4rem;
+        }
+    
+        &.nutshell {
+            background-image: url(/images/mobile/quote.jpg);
+            & >.container {
+                top: 20%;
+                transform: unset;
+            }
+        }
+    
     }
 }
