@@ -1,0 +1,98 @@
+section {
+  font-size: 1.6rem;
+  &.slide {
+      height: 50vh;
+      &.hero {
+          min-height: 450px;
+          color: #ffffff;
+          background-color: #386272;
+          background-image: url(/images/rules.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          & .left {
+              position: absolute;
+              top: 25%;
+              left: 5%;
+              & .catchphrase {
+                  font-family: 'Cabin', sans-serif;
+                  letter-spacing: 0.3rem;
+                  font-size: 6.5rem;
+                  font-weight: bold;
+                  line-height: 0.93;
+                  margin-bottom: 50px;
+                  width: 60vw;
+              }
+          }
+      }
+      &.panel {
+          margin-top: 50px;
+          height: unset;
+          overflow: hidden;
+          position: relative;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          & .content {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              & .title {
+                  flex: 1;
+                  font-family: 'Cabin', sans-serif;
+                  letter-spacing: 0.1rem;
+                  font-size: 4.2rem;
+                  font-weight: bold;
+                  line-height: 1.33;
+                  padding-left: 5%;
+                  padding-right: 5%;
+                  margin-bottom: 25px;
+              }
+              & .description {
+                  flex: 1;
+                  font-size: 2.1rem;
+                  font-weight: 500;
+                  line-height: 1.6;
+                  padding-left: 5%;
+                  padding-right: 5%;
+                  &>div {
+                      margin-bottom: 2rem;
+                      &:last-child {
+                          margin-bottom: 0em;
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  section {
+      &.slide {
+          &.hero {
+              & .left {
+                  position: relative;
+                  width: 90%;
+                  padding: 12vh 5% 0 5%;
+                  transform: unset;
+                  top: unset;
+                  left: unset;
+                  & .catchphrase {
+                      width: unset;
+                      margin-bottom: 15vh;
+                      &>div {
+                          display: inline;
+                      }
+                  }
+              }
+          }
+          &.panel .content {
+              flex-direction: column;
+              & .title {
+                  margin-bottom: 4rem;
+              }
+          }
+      }
+  }
+}
