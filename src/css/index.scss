@@ -19,15 +19,36 @@ nav {
     justify-content: space-between;
     line-height: 24px;
     transition: background-color 0ms;
-
     &.scrolled {
-      position: fixed;
-      background-color: rgba(46, 77, 88, 0.8);
-      padding: 15px 5% 15px 5%;
-      transition: background-color 500ms;
+        position: fixed;
+        background-color: rgba(46, 77, 88, 0.8);
+        padding: 15px 5% 15px 5%;
+        transition: background-color 500ms;
     }
-
+    & .side-bar {
+      position: fixed;
+      right: 0;
+      background: rgba(46, 77, 88, 0.95);
+      top: 108px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 500ms, opacity 500ms;
+      &.open {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      & div {
+        background: rgba(46, 77, 88, 1);
+        font-weight: bold;
+        padding: 10px;
+      }
+      & li {
+        display: block;
+        padding-right: 15px;
+      }
+    }
     &>.left {
+        cursor: pointer;
         display: flex;
         flex-direction: row;
         &>img {
@@ -42,18 +63,33 @@ nav {
     &>.right {
         display: flex;
         flex-direction: row;
-        & > div {
+        &>div {
             margin-left: 5rem;
+            cursor: pointer;
         }
         & .hamburger {
             display: inline-block;
             vertical-align: middle;
             margin-left: 1rem;
             &>div {
-                width: 1.6rem;
+                transition: opacity 250ms, transform 500ms;
+                width: 15px;
                 height: 2px;
                 background-color: #fff;
                 margin: 3px 0;
+            }
+            &.open {
+                &>div {
+                    opacity: 0;
+                }
+                &>div:first-child {
+                    opacity: 1;
+                    transform: translateX(4px) rotate(45deg) translateY(7px);
+                }
+                &>div:last-child {
+                    opacity: 1;
+                    transform: translateX(4px) rotate(-45deg) translateY(-7px);
+                }
             }
         }
     }
@@ -64,6 +100,7 @@ section {
     &.slide {
         height: 100vh;
         &.hero {
+            min-height: 450px;
             color: #ffffff;
             background-color: #386272;
             background-image: url(/images/hero.jpg);
@@ -89,11 +126,9 @@ section {
                     margin-bottom: 50px;
                     width: 60vw;
                 }
-
-                & > .play-mobile {
+                &>.play-mobile {
                     display: none;
                 }
-
                 & .cta {
                     cursor: pointer;
                     width: 337px;
@@ -108,7 +143,7 @@ section {
                     }
                 }
             }
-            & > .more {
+            &>.more {
                 position: absolute;
                 right: 40px;
                 top: 50%;
@@ -119,7 +154,7 @@ section {
                     width: 100px;
                 }
             }
-            & > .play-desktop {
+            &>.play-desktop {
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -227,7 +262,6 @@ section {
         &.action {
             margin: 0 5% 0 5%;
         }
-
         &>.title {
             margin-top: 150px;
             text-align: center;
@@ -318,19 +352,17 @@ footer {
 }
 
 @media only screen and (max-width: 768px) {
-    html, body {
+    html,
+    body {
         font-size: 45%;
     }
-
     nav {
         position: fixed;
         padding: 12px 5% 12px 5%;
-
         &.scrolled {
-          padding: 12px 5% 12px 5%;
+            padding: 12px 5% 12px 5%;
         }
     }
-
     section {
         &.slide {
             &.hero {
@@ -341,91 +373,73 @@ footer {
                     transform: unset;
                     top: unset;
                     left: unset;
-
                     & .catchphrase {
                         width: unset;
                         margin-bottom: 15vh;
-
-                        & > div {
+                        &>div {
                             display: inline;
                         }
                     }
-
-                    & > .play-mobile {
+                    &>.play-mobile {
                         display: block;
                         text-align: center;
                         margin-bottom: 21px;
-
-                        & > img {
+                        &>img {
                             width: 58px;
                             height: 58px;
                             vertical-align: middle;
                             margin-right: 15px;
                         }
-
-                        & > span {
+                        &>span {
                             font-size: 2.8rem;
                             font-weight: bold;
                         }
                     }
-
-                    & > .cta {
+                    &>.cta {
                         font-size: 2.8rem;
                         width: 100%;
                     }
                 }
-
-                & > .play-desktop {
+                &>.play-desktop {
                     display: none;
                 }
-
-                & > .more {
+                &>.more {
                     display: none;
                 }
             }
-
             &.panel .content {
                 flex-direction: column;
-
                 & .title {
                     margin-bottom: 4rem;
                 }
             }
-
             &.nutshell>.container>.title {
                 width: 80%;
                 margin-top: 4rem;
             }
-
             &.nutshell {
                 background-image: url(/images/mobile/quote.jpg);
-                & >.container {
+                &>.container {
                     top: 20%;
                     transform: unset;
                 }
             }
         }
-
         &.goals {
             flex-direction: column;
-
-            & > div {
+            &>div {
                 width: unset;
                 margin-left: 14%;
                 margin-right: 14%;
-
                 & .title {
                     margin-top: 1.7rem;
                 }
             }
         }
-
         &.kpi {
             flex-direction: column;
-
-            & > div {
+            &>div {
                 width: unset;
-
                 & .metric {
                     margin-top: 1.7rem;
                     margin-bottom: 0;
