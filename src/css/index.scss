@@ -72,8 +72,8 @@ section {
                 }
                 & .catchphrase {
                     font-family: 'Cabin', sans-serif;
-                    letter-spacing: 0.4rem;
-                    font-size: 7rem;
+                    letter-spacing: 0.3rem;
+                    font-size: 6.5rem;
                     font-weight: bold;
                     line-height: 0.93;
                     margin-bottom: 50px;
@@ -138,7 +138,7 @@ section {
                 & .title {
                     flex: 1;
                     font-family: 'Cabin', sans-serif;
-                    letter-spacing: 0.2rem;
+                    letter-spacing: 0.1rem;
                     font-size: 4.2rem;
                     font-weight: bold;
                     line-height: 1.33;
@@ -214,6 +214,10 @@ section {
         }
     }
     &.action {
+        &.action {
+            margin: 0 5% 0 5%;
+        }
+
         &>.title {
             margin-top: 150px;
             text-align: center;
@@ -306,80 +310,113 @@ footer {
 
 @media only screen and (max-width: 768px) {
     html, body {
-        font-size: 40%;
+        font-size: 45%;
     }
 
-    section.slide {
-        &.hero {
-            & .left {
-                position: relative;
-                width: 90%;
-                padding: 100px 5% 0 5%;
-                transform: unset;
-                top: unset;
-                left: unset;
+    nav {
+        margin: 15px 5% 0 5%;
+    }
 
-                & .catchphrase {
-                    width: unset;
-                    margin-bottom: 180px;
+    section {
+        &.slide {
+            &.hero {
+                & .left {
+                    position: relative;
+                    width: 90%;
+                    padding: 12vh 5% 0 5%;
+                    transform: unset;
+                    top: unset;
+                    left: unset;
 
-                    & > div {
-                        display: inline;
-                    }
-                }
+                    & .catchphrase {
+                        width: unset;
+                        margin-bottom: 15vh;
 
-                & > .play-mobile {
-                    display: block;
-                    text-align: center;
-                    margin-bottom: 21px;
-
-                    & > img {
-                        width: 58px;
-                        height: 58px;
-                        vertical-align: middle;
-                        margin-right: 15px;
+                        & > div {
+                            display: inline;
+                        }
                     }
 
-                    & > span {
+                    & > .play-mobile {
+                        display: block;
+                        text-align: center;
+                        margin-bottom: 21px;
+
+                        & > img {
+                            width: 58px;
+                            height: 58px;
+                            vertical-align: middle;
+                            margin-right: 15px;
+                        }
+
+                        & > span {
+                            font-size: 2.8rem;
+                            font-weight: bold;
+                        }
+                    }
+
+                    & > .cta {
                         font-size: 2.8rem;
+                        width: 100%;
                     }
                 }
 
-                & > .cta {
-                    font-size: 2.8rem;
-                    width: 100%;
+                & > .play-desktop {
+                    display: none;
+                }
+
+                & > .more {
+                    display: none;
                 }
             }
 
-            & > .play-desktop {
-                display: none;
+            &.panel .content {
+                flex-direction: column;
+        
+                & .title {
+                    margin-bottom: 4rem;
+                }
             }
 
-            & > .more {
-                display: none;
+            &.nutshell>.container>.title {
+                width: 80%;
+                margin-top: 4rem;
             }
+        
+            &.nutshell {
+                background-image: url(/images/mobile/quote.jpg);
+                & >.container {
+                    top: 20%;
+                    transform: unset;
+                }
+            }  
         }
 
-        &.panel .content {
+        &.goals {
             flex-direction: column;
-    
-            & .title {
-                margin-bottom: 4rem;
+
+            & > div {
+                width: unset;
+                margin-left: 14%;
+                margin-right: 14%;
+
+                & .title {
+                    margin-top: 1.7rem;
+                }
             }
         }
 
-        &.nutshell>.container>.title {
-            width: 80%;
-            margin-top: 4rem;
-        }
-    
-        &.nutshell {
-            background-image: url(/images/mobile/quote.jpg);
-            & >.container {
-                top: 20%;
-                transform: unset;
+        &.kpi {
+            flex-direction: column;
+
+            & > div {
+                width: unset;
+
+                & .metric {
+                    margin-top: 1.7rem;
+                    margin-bottom: 0;
+                }
             }
         }
-    
     }
 }
