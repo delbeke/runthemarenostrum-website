@@ -8,15 +8,25 @@ body {
 }
 
 nav {
-    position: fixed;
+    z-index: 100;
+    position: absolute;
     width: 90%;
-    margin: 44px 5% 0 5%;
+    padding: 44px 5% 44px 5%;
     color: #ffffff;
     font-size: 1.6rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     line-height: 24px;
+    transition: background-color 0ms;
+
+    &.scrolled {
+      position: fixed;
+      background-color: rgba(46, 77, 88, 0.8);
+      padding: 15px 5% 15px 5%;
+      transition: background-color 500ms;
+    }
+
     &>.left {
         display: flex;
         flex-direction: row;
@@ -267,7 +277,6 @@ section {
         flex-direction: row;
         justify-content: center;
         &>div {
-            width: 15%;
             margin-left: 40px;
             margin-right: 40px;
             &>.metric {
@@ -314,7 +323,12 @@ footer {
     }
 
     nav {
-        margin: 15px 5% 0 5%;
+        position: fixed;
+        padding: 12px 5% 12px 5%;
+
+        &.scrolled {
+          padding: 12px 5% 12px 5%;
+        }
     }
 
     section {
@@ -372,7 +386,7 @@ footer {
 
             &.panel .content {
                 flex-direction: column;
-        
+
                 & .title {
                     margin-bottom: 4rem;
                 }
@@ -382,14 +396,14 @@ footer {
                 width: 80%;
                 margin-top: 4rem;
             }
-        
+
             &.nutshell {
                 background-image: url(/images/mobile/quote.jpg);
                 & >.container {
                     top: 20%;
                     transform: unset;
                 }
-            }  
+            }
         }
 
         &.goals {
