@@ -38,7 +38,7 @@ gulp.task('png', () =>
 )
 
 gulp.task('html', () => {
-  return gulp.src('src/*.html')
+  return gulp.src(['src/*.html', 'src/*.ico'])
     .pipe(gulp.dest('build/'))
 })
 

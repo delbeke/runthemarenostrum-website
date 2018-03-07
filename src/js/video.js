@@ -1,6 +1,8 @@
-window.addEventListener('load', function () {
-  var $play = document.querySelector('.play-desktop')
-  $play.parentNode.addEventListener('click', function () {
+var $play = document.querySelector('.play-desktop')
+if ($play) {
+  window.addEventListener('load', function () {
+    $play.parentNode.addEventListener('click', function () {
 
+    })
   })
-})
+}
