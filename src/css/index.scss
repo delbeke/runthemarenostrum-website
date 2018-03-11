@@ -138,5 +138,11 @@ footer {
       &.scrolled {
           padding: 12px 5% 12px 5%;
       }
+      &>.left>A>img {
+        margin-right: 12px;
+      }
+      & .register {
+        display: none;
+      }
   }
 }
