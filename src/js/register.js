@@ -1,3 +1,18 @@
+var monthToName = {
+  '01': 'January',
+  '02': 'February',
+  '03': 'March',
+  '04': 'April',
+  '05': 'May',
+  '06': 'June',
+  '07': 'July',
+  '08': 'August',
+  '09': 'September',
+  '10': 'October',
+  '11': 'November',
+  '12': 'December'
+}
+
 function requestStages (cbDone) {
   var ApiBaseUrl = 'https://rn9kdjiwn6.execute-api.eu-central-1.amazonaws.com/dev'
   var oReq = new window.XMLHttpRequest()
@@ -10,44 +25,69 @@ function requestStages (cbDone) {
   oReq.send()
 }
 
-function getMonths (stages) {
+function getYears (stages) {
+  var years = {}
+  for (var i = 0; i < stages.length; i++) {
+    var date = stages[i].startDate
+    var dateParts = date.split('-')
+    years[dateParts[2]] = 1
+  }
+  var arr = Object.keys(years)
+  arr.sort()
+  return arr
+}
+
+function getMonths (stages, year) {
   var months = {}
   for (var i = 0; i < stages.length; i++) {
     var date = stages[i].startDate
     var dateParts = date.split('-')
-    months[(dateParts[2] + ' - ' + dateParts[1])] = 1
+    if (dateParts[2] === year) {
+      months[dateParts[1]] = 1
+    }
   }
   var arr = Object.keys(months)
   arr.sort()
   return arr
 }
 
-function filterByMonth (month, stages) {
+function filterByMonth (month, year, stages) {
   var result = []
-  var dateParts = month.split(' - ')
-  var searchDate = dateParts[1] + '-' + dateParts[0]
+  var searchDate = month + '-' + year
   for (var i = 0; i < stages.length; i++) {
     var stage = stages[i]
     if (stage.startDate.indexOf(searchDate) >= 0) {
       result.push(stage)
     }
   }
+  result.sort(function (s1, s2) {
+    return ((s1.startDate > s2.startDate) ? 1 : -1)
+  })
   return result
 }
 
-function makeDateButton (container, date, onClick) {
-  var monthDiv = document.createElement('div')
-  monthDiv.textContent = date
+function makeDateButton (container, text, value, onClick) {
+  var monthDiv = document.createElement('button')
+  monthDiv.textContent = text
   container.appendChild(monthDiv)
   monthDiv.addEventListener('click', function () {
-    onClick(date)
+    onClick(value)
   })
 }
 
+function create (parent, tagName, className, content) {
+  var el = document.createElement(tagName)
+  el.className = className
+  el.textContent = content || ''
+  return parent.appendChild(el)
+}
+
 function makeStageRow (container, stage, onClick) {
-  var stageBox = document.createElement('div')
-  stageBox.textContent = stage.startDate + ': ' + stage.startCity + ' -> ' + stage.stopCity + ' (' + stage.country.join(', ') + ')'
-  container.appendChild(stageBox)
+  var stageBox = create(container, 'div', 'stage')
+  create(stageBox, 'div', 'date', stage.startDate)
+  var locationBox = create(stageBox, 'div', 'location')
+  create(locationBox, 'div', 'start', stage.startCity)
+  create(locationBox, 'div', 'start', stage.stopCity)
   stageBox.addEventListener('click', function () {
     onClick(stage)
   })
@@ -57,33 +97,66 @@ function initMap () {
   // map api loaded
 }
 
-function renderMap (stage) {
-  var start = stage.startPos.split(', ')
-  var map = new window.google.maps.Map(document.querySelector('.map'), {
-    center: {lat: parseFloat(start[0]), lng: parseFloat(start[1])},
-    zoom: 8
-  })
+function makeStepVisible (step) {
+  var stepBox = document.querySelector('.step.s-' + step)
+  if (stepBox) {
+    stepBox.style.opacity = 1
+    stepBox.style.display = 'block'
+  }
 }
 
-function renderStages (stagesContainer, stages) {
-  return function (month) {
+function renderMap (stage) {
+  makeStepVisible(3)
+  makeStepVisible(4)
+  // scroll to map
+  window.scrollTo(0, document.querySelector('.map').offsetTop + (window.innerHeight / 3))
+  if (window.__stages_map) {
+    var map = window.__stages_map
+    var start = stage.startPos.split(', ')
+    map.setCenter({lat: parseFloat(start[0]), lng: parseFloat(start[1])})
+  }
+}
+
+function renderStages (stages) {
+  var stagesContainer = document.querySelector('.stages')
+  return function (dateObj) {
+    makeStepVisible(2)
     stagesContainer.innerHTML = ''
-    var matchingStages = filterByMonth(month, stages)
+    var matchingStages = filterByMonth(dateObj.month, dateObj.year, stages)
     for (var s = 0; s < matchingStages.length; s++) {
       makeStageRow(stagesContainer, matchingStages[s], renderMap)
     }
   }
 }
 
+function renderMonthsForYear (stages, year) {
+  var months = getMonths(stages, year)
+  var monthContainer = document.querySelector('.months')
+  monthContainer.innerHTML = ''
+  for (var m = 0; m < months.length; m++) {
+    var fullNameMonth = monthToName[months[m]] || months[m]
+    makeDateButton(monthContainer, fullNameMonth, {year: year, month: months[m]}, renderStages(stages))
+  }
+}
+
 if (window.location.href.indexOf('/register') >= 0) {
   window.addEventListener('load', function () {
     requestStages(function (stages) {
-      var months = getMonths(stages)
-      var monthContainer = document.querySelector('.months')
-      var stagesContainer = document.querySelector('.stages')
-      for (var m = 0; m < months.length; m++) {
-        makeDateButton(monthContainer, months[m], renderStages(stagesContainer, stages))
+      var years = getYears(stages)
+      var yearContainer = document.querySelector('.years')
+      for (var y = 0; y < years.length; y++) {
+        makeDateButton(yearContainer, years[y], years[y], function (year) {
+          renderMonthsForYear(stages, year)
+        })
       }
+      renderMonthsForYear(stages, years[0])
+      // (pre)load map
+      var start = stages[0].startPos.split(', ')
+      var mapContainer = document.querySelector('.map')
+      window.__stages_map = new window.google.maps.Map(mapContainer, {
+        center: {lat: parseFloat(start[0]), lng: parseFloat(start[1])},
+        zoom: 8
+      })
     })
   })
 }

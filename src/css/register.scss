@@ -1,109 +1,151 @@
+html {
+    scroll-behavior: smooth;
+}
+
 section {
-  font-size: 1.6rem;
-  &.slide {
-      height: 50vh;
-      &.hero {
-          min-height: 450px;
-          color: #ffffff;
-          background-color: #386272;
-          background-image: url(/images/rules.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-          & .left {
-              position: absolute;
-              top: 25%;
-              left: 5%;
-              & .catchphrase {
-                  font-family: 'Cabin', sans-serif;
-                  letter-spacing: 0.3rem;
-                  font-size: 6.5rem;
-                  font-weight: bold;
-                  line-height: 0.93;
-                  margin-bottom: 50px;
-                  width: 60vw;
-              }
-          }
-      }
-      &.panel {
-          margin-top: 50px;
-          height: unset;
-          overflow: hidden;
-          position: relative;
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-
-          & .date-title {
-            font-family: 'Cabin', sans-serif;
-            font-size: 3em;
-            text-align: center;
-          }
-
-          & .months {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            & > DIV {
-              cursor: pointer;
-              margin: 10px;
-              padding: 10px;
-              color: white;
-              background-color: rgba(46,77,88,.8);
-              &:hover {
-                background-color: rgba(46,77,88,1);
-              }
+    font-size: 1.6rem;
+    &.slide {
+        height: 50vh;
+        &.hero {
+            min-height: 450px;
+            color: #ffffff;
+            background-color: #386272;
+            background-image: url(/images/rules.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            & .left {
+                position: absolute;
+                top: 25%;
+                left: 5%;
+                & .catchphrase {
+                    font-family: 'Cabin', sans-serif;
+                    letter-spacing: 0.3rem;
+                    font-size: 6.5rem;
+                    font-weight: bold;
+                    line-height: 0.93;
+                    margin-bottom: 50px;
+                    width: 60vw;
+                }
             }
-          }
-
-          & .stages {
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid gray;
-            max-width: 720px;
-            max-height: 100px;
-            overflow-y: auto;
-            & > DIV {
-              cursor: pointer;
-              margin: 10px;
-              padding: 10px;
-              color: white;
-              background-color: rgba(46,77,88,.8);
-              &:hover {
-                background-color: rgba(46,77,88,1);
+        }
+        &.panel {
+            margin-top: 50px;
+            height: unset;
+            overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            & .step {
+              opacity: 0;
+              transition: opacity 500ms;
+              &.s-1 {
+                opacity: 1;
+                text-align: center;
+                & > .devider {
+                  border-bottom: solid 1px #ccc;
+                  width: 50px;
+                  margin: 10px auto;
+                }
               }
-            }
-          }
+              &.s-4 {
+                text-align: center;
+                &>BUTTON {
+                  cursor: pointer;
+                  margin: 10px auto;
+                  padding: 20px;
+                  color: white;
+                  border: transparent;
+                  background-color: #09aae2;
+              }
+              }
 
-          & .map {
-            width: 100%;
-            height: 50vh;
-          }
-      }
-  }
+                & .title {
+                    font-size: 2em;
+                    text-align: center;
+                    margin-top: 1em;
+                    margin-bottom: 0.5em;
+                }
+                & .months,
+                & .years {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    &>BUTTON {
+                        cursor: pointer;
+                        margin: 10px;
+                        padding: 10px;
+                        color: white;
+                        border: transparent;
+                        background-color: #09aae2;
+                    }
+                }
+                & .stages {
+                    margin: 10px auto;
+                    padding: 10px;
+                    max-width: 720px;
+                    &>.stage {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        cursor: pointer;
+                        margin: 10px;
+                        padding: 10px;
+                        color: white;
+                        background-color: #09aae2;
+                        &>.date {
+                            width: 110px;
+                        }
+                        &>.location {
+                            display: flex;
+                            flex-direction: column;
+                            width: calc(100% - 110px);
+                            &>DIV {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+                }
+                & .map {
+                    width: 100%;
+                    height: 50vh;
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 768px) {
-  section {
-      &.slide {
-          &.hero {
-              & .left {
-                  position: relative;
-                  width: 90%;
-                  padding: 12vh 5% 0 5%;
-                  transform: unset;
-                  top: unset;
-                  left: unset;
-                  & .catchphrase {
-                      width: unset;
-                      margin-bottom: 15vh;
-                      &>div {
-                          display: inline;
-                      }
-                  }
-              }
-          }
-      }
-  }
+    section {
+        &.slide {
+            &.hero {
+                & .left {
+                    position: relative;
+                    width: 90%;
+                    padding: 12vh 5% 0 5%;
+                    transform: unset;
+                    top: unset;
+                    left: unset;
+                    & .catchphrase {
+                        width: unset;
+                        margin-bottom: 15vh;
+                        &>div {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+            &.panel .stages>.stage {
+                & .date {
+                    width: 80px;
+                }
+                & .location {
+                    width: calc(100% - 80px);
+                }
+            }
+        }
+    }
 }
