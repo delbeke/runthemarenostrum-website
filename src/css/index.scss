@@ -56,13 +56,16 @@ nav {
         cursor: pointer;
         display: flex;
         flex-direction: row;
-        &>img {
-            width: 24px;
-            height: 24px;
-            margin-right: 24px;
-        }
-        &>span {
-            text-transform: uppercase;
+        &>A{
+          &>img {
+              width: 24px;
+              height: 24px;
+              margin-right: 24px;
+              vertical-align: middle;
+          }
+          &>span {
+              text-transform: uppercase;
+          }
         }
     }
     &>.right {

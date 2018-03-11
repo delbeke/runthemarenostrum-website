@@ -231,6 +231,15 @@ section {
     }
 }
 
+.panel-devider {
+  text-align: center;
+  margin: 1em 0;
+  & > IMG {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media only screen and (max-width: 768px) {
     section {
         &.slide {
