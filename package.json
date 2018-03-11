@@ -25,6 +25,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.4.0",
     "gulp-csso": "^3.0.1",
+    "gulp-html-replace": "^1.6.2",
     "gulp-image-resize": "^0.13.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-livereload": "^3.8.1",
@@ -33,5 +34,6 @@
     "gulp-sequence": "^1.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "standard": "^10.0.3"
-  }
+  },
+  "dependencies": {}
 }

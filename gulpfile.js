@@ -8,6 +8,7 @@ const connect = require('gulp-connect')
 const imagemin = require('gulp-imagemin')
 const imageResize = require('gulp-image-resize')
 const del = require('del')
+const htmlreplace = require('gulp-html-replace')
 
 gulp.task('connect', () => {
   connect.server({
@@ -39,6 +40,10 @@ gulp.task('png', () =>
 
 gulp.task('html', () => {
   return gulp.src(['src/*.html', 'src/*.ico'])
+    .pipe(htmlreplace({
+      'header': { src: gulp.src('src/blocks/header.html') },
+      'menu': { src: gulp.src('src/blocks/menu.html') }
+    }))
     .pipe(gulp.dest('build/'))
 })
 
