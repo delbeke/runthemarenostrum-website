@@ -79,6 +79,9 @@ section {
                         color: white;
                         border: transparent;
                         background-color: #09aae2;
+                        &.selected {
+                          background-color: #2e4d58;
+                        }
                     }
                 }
                 & .stages {

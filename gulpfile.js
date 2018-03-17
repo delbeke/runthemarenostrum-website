@@ -62,6 +62,11 @@ gulp.task('js', () => {
     .pipe(gulp.dest('build/js'))
 })
 
+gulp.task('maps', () =>
+  gulp.src('src/maps/*.kmz')
+    .pipe(gulp.dest('build/maps'))
+)
+
 gulp.task('reload', () => {
   return gulp.src('src/*.html')
     .pipe(connect.reload())
@@ -77,4 +82,4 @@ gulp.task('watch', ['connect', 'default'], () => {
   })
 })
 
-gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png'])(cb))
+gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png', 'maps'])(cb))

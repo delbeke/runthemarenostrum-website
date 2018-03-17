@@ -71,6 +71,11 @@ function makeDateButton (container, text, value, onClick) {
   monthDiv.textContent = text
   container.appendChild(monthDiv)
   monthDiv.addEventListener('click', function () {
+    var buttons = container.querySelectorAll('button')
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].className = ''
+    }
+    monthDiv.className = 'selected'
     onClick(value)
   })
 }
@@ -86,8 +91,8 @@ function makeStageRow (container, stage, onClick) {
   var stageBox = create(container, 'div', 'stage')
   create(stageBox, 'div', 'date', stage.startDate)
   var locationBox = create(stageBox, 'div', 'location')
-  create(locationBox, 'div', 'start', stage.startCity)
-  create(locationBox, 'div', 'start', stage.stopCity)
+  create(locationBox, 'div', 'start', 'FROM: ' + stage.startCity)
+  create(locationBox, 'div', 'stop', 'TO: ' + stage.stopCity)
   stageBox.addEventListener('click', function () {
     onClick(stage)
   })
@@ -105,6 +110,11 @@ function makeStepVisible (step) {
   }
 }
 
+function parseCoordinates (text) {
+  text = text.split(', ')
+  return { lat: parseFloat(text[0]), lng: parseFloat(text[1]) }
+}
+
 function renderMap (stage) {
   makeStepVisible(3)
   makeStepVisible(4)
@@ -112,8 +122,12 @@ function renderMap (stage) {
   window.scrollTo(0, document.querySelector('.map').offsetTop + (window.innerHeight / 3))
   if (window.__stages_map) {
     var map = window.__stages_map
-    var start = stage.startPos.split(', ')
-    map.setCenter({lat: parseFloat(start[0]), lng: parseFloat(start[1])})
+    var startCx = parseCoordinates(stage.startPos)
+    var stopCx = parseCoordinates(stage.stopPos)
+    window.__stages_map_marker_start.setPosition(startCx)
+    window.__stages_map_marker_stop.setPosition(stopCx)
+    map.setCenter({ lat: ((startCx.lat + stopCx.lat) / 2), lng: ((startCx.lng + stopCx.lng) / 2) })
+    map.setZoom(9)
   }
 }
 
@@ -124,7 +138,11 @@ function renderStages (stages) {
     stagesContainer.innerHTML = ''
     var matchingStages = filterByMonth(dateObj.month, dateObj.year, stages)
     for (var s = 0; s < matchingStages.length; s++) {
-      makeStageRow(stagesContainer, matchingStages[s], renderMap)
+      var stage = matchingStages[s]
+      // leave buffer stages out
+      if (stage.stageId.indexOf('BUFFER') === -1) {
+        makeStageRow(stagesContainer, matchingStages[s], renderMap)
+      }
     }
   }
 }
@@ -155,8 +173,12 @@ if (window.location.href.indexOf('/register') >= 0) {
       var mapContainer = document.querySelector('.map')
       window.__stages_map = new window.google.maps.Map(mapContainer, {
         center: {lat: parseFloat(start[0]), lng: parseFloat(start[1])},
-        zoom: 8
+        zoom: 10
       })
+      var kmzLayer = new window.google.maps.KmlLayer('https://s3.eu-central-1.amazonaws.com/runthemarenostrum/maps/m1.kmz')
+      kmzLayer.setMap(window.__stages_map)
+      window.__stages_map_marker_start = new window.google.maps.Marker({ map: window.__stages_map, title: 'START', label: 'A' })
+      window.__stages_map_marker_stop = new window.google.maps.Marker({ map: window.__stages_map, title: 'STOP', label: 'B' })
     })
   })
 }
