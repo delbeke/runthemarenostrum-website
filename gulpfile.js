@@ -23,7 +23,7 @@ gulp.task('clean', () => {
 
 gulp.task('images', () =>
   gulp.src('src/images/**/*.jpg')
-    .pipe(imageResize({ width: 1500, crop: false, upscale: false }))
+    // .pipe(imageResize({ width: 1500, crop: false, upscale: false }))
     .pipe(imagemin())
     .pipe(gulp.dest('build/images'))
 )
@@ -42,7 +42,8 @@ gulp.task('html', () => {
   return gulp.src(['src/*.html', 'src/*.ico'])
     .pipe(htmlreplace({
       'header': { src: gulp.src('src/blocks/header.html') },
-      'menu': { src: gulp.src('src/blocks/menu.html') }
+      'menu': { src: gulp.src('src/blocks/menu.html') },
+      'footer': { src: gulp.src('src/blocks/footer.html') }
     }))
     .pipe(gulp.dest('build/'))
 })

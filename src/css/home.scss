@@ -214,6 +214,7 @@ section {
         display: flex;
         flex-direction: row;
         justify-content: center;
+
         &>div {
             margin-left: 40px;
             margin-right: 40px;
@@ -229,6 +230,14 @@ section {
                 text-align: center;
             }
         }
+    }
+
+    &.runners {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(/images/footer.jpg);
+        min-height: 500px;
     }
 }
 

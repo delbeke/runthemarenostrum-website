@@ -98,7 +98,7 @@ function makeStageRow (container, stage, onClick) {
   })
 }
 
-function initMap () {
+window.initMap = function() {
   // map api loaded
 }
 
@@ -175,7 +175,7 @@ if (window.location.href.indexOf('/register') >= 0) {
         center: {lat: parseFloat(start[0]), lng: parseFloat(start[1])},
         zoom: 10
       })
-      var kmzLayer = new window.google.maps.KmlLayer('https://s3.eu-central-1.amazonaws.com/runthemarenostrum/maps/m1.kmz')
+      var kmzLayer = new window.google.maps.KmlLayer('https://www.runthemarenostrum.com/maps/m1.kmz')
       kmzLayer.setMap(window.__stages_map)
       window.__stages_map_marker_start = new window.google.maps.Marker({ map: window.__stages_map, title: 'START', label: 'A' })
       window.__stages_map_marker_stop = new window.google.maps.Marker({ map: window.__stages_map, title: 'STOP', label: 'B' })
