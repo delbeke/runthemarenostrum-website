@@ -97,10 +97,10 @@ section {
                         padding: 10px;
                         color: white;
                         background-color: #09aae2;
-                        &>.date {
-                            width: 110px;
+                        &>.left {
+                            width: 140px;
                         }
-                        &>.location {
+                        &>.right {
                             display: flex;
                             flex-direction: column;
                             width: calc(100% - 110px);
@@ -109,6 +109,18 @@ section {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                             }
+                        }
+                        &.selected {
+                          background-color: #2e4d58;
+                        }
+
+                        &.buffer {
+                          background-color: #ddd;
+                          color: #000;
+                          &.selected {
+                            color: #fff;
+                            background-color: #2e4d58;
+                          }
                         }
                     }
                 }

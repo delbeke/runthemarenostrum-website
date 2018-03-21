@@ -88,13 +88,23 @@ function create (parent, tagName, className, content) {
 }
 
 function makeStageRow (container, stage, onClick) {
-  var stageBox = create(container, 'div', 'stage')
-  create(stageBox, 'div', 'date', stage.startDate)
-  var locationBox = create(stageBox, 'div', 'location')
-  create(locationBox, 'div', 'start', 'FROM: ' + stage.startCity)
-  create(locationBox, 'div', 'stop', 'TO: ' + stage.stopCity)
+  var buffer = (stage.stageId.indexOf('BUFFER') >= 0)
+  var stageClass = 'stage' + (buffer ? ' buffer' : '')
+  var stageBox = create(container, 'div', stageClass)
+  stageBox._className = stageClass
+  var leftSide = create(stageBox, 'div', 'left')
+  create(leftSide, 'div', 'date', stage.startDate)
+  create(leftSide, 'div', 'stageid', 'ID: ' + stage.stageId)
+  var rightSide = create(stageBox, 'div', 'right')
+  create(rightSide, 'div', 'start', 'FROM: ' + stage.startCity)
+  create(rightSide, 'div', 'stop', 'TO: ' + stage.stopCity)
   stageBox.addEventListener('click', function () {
     onClick(stage)
+    var stageBoxes = container.querySelectorAll('.stage')
+    for (let i = 0; i < stageBoxes.length; i++) {
+      stageBoxes[i].className = stageBoxes[i]._className
+    }
+    stageBox.className += ' selected'
   })
 }
 
@@ -138,11 +148,7 @@ function renderStages (stages) {
     stagesContainer.innerHTML = ''
     var matchingStages = filterByMonth(dateObj.month, dateObj.year, stages)
     for (var s = 0; s < matchingStages.length; s++) {
-      var stage = matchingStages[s]
-      // leave buffer stages out
-      if (stage.stageId.indexOf('BUFFER') === -1) {
-        makeStageRow(stagesContainer, matchingStages[s], renderMap)
-      }
+      makeStageRow(stagesContainer, matchingStages[s], renderMap)
     }
   }
 }
