@@ -14,7 +14,7 @@ var monthToName = {
 }
 
 function requestStages (cbDone) {
-  var ApiBaseUrl = 'https://rn9kdjiwn6.execute-api.eu-central-1.amazonaws.com/dev'
+  var ApiBaseUrl = 'https://api.runthemarenostrum.com/stages'
   var oReq = new window.XMLHttpRequest()
   oReq.addEventListener('readystatechange', function (data) {
     if (this.readyState === 4 && this.status === 200) {
@@ -125,9 +125,10 @@ function parseCoordinates (text) {
   return { lat: parseFloat(text[0]), lng: parseFloat(text[1]) }
 }
 
-function renderMap (stage) {
+function renderStageDetails (stage) {
   makeStepVisible(3)
   makeStepVisible(4)
+  window.__selectedStageId = stage.stageId
   // scroll to map
   window.scrollTo(0, document.querySelector('.map').offsetTop + (window.innerHeight / 3))
   if (window.__stages_map) {
@@ -148,7 +149,7 @@ function renderStages (stages) {
     stagesContainer.innerHTML = ''
     var matchingStages = filterByMonth(dateObj.month, dateObj.year, stages)
     for (var s = 0; s < matchingStages.length; s++) {
-      makeStageRow(stagesContainer, matchingStages[s], renderMap)
+      makeStageRow(stagesContainer, matchingStages[s], renderStageDetails)
     }
   }
 }
@@ -185,6 +186,13 @@ if (window.location.href.indexOf('/register') >= 0) {
       kmzLayer.setMap(window.__stages_map)
       window.__stages_map_marker_start = new window.google.maps.Marker({ map: window.__stages_map, title: 'START', label: 'A' })
       window.__stages_map_marker_stop = new window.google.maps.Marker({ map: window.__stages_map, title: 'STOP', label: 'B' })
+
+      var joinBtn = document.querySelector('.join-stage')
+      joinBtn.addEventListener('click', function () {
+        if (window.__selectedStageId) {
+          window.location.href = 'https://panel.runthemarenostrum.com/?registerStageId=' + encodeURIComponent(window.__selectedStageId)
+        }
+      })
     })
   })
 }
