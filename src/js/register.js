@@ -89,9 +89,11 @@ function create (parent, tagName, className, content) {
 
 function makeStageRow (container, stage, onClick) {
   var buffer = (stage.stageId.indexOf('BUFFER') >= 0)
+  var taken = (stage.officialTeam && stage.officialTeam.length > 0)
   var stageClass = 'stage' + (buffer ? ' buffer' : '')
   var stageBox = create(container, 'div', stageClass)
   stageBox._className = stageClass
+  var markerSide = create(stageBox, 'div', 'marker', (taken ? '✔' : ''))
   var leftSide = create(stageBox, 'div', 'left')
   create(leftSide, 'div', 'date', stage.startDate)
   create(leftSide, 'div', 'stageid', (buffer ? '' : 'Stage Nr: ') + stage.stageId)
@@ -137,7 +139,8 @@ function renderStageDetails (stage) {
   makeStepVisible(3)
   makeStepVisible(4)
   var buffer = (stage.stageId.indexOf('BUFFER') >= 0)
-  if (buffer) {
+  var taken = (stage.officialTeam && stage.officialTeam.length > 0)
+  if (buffer || taken) {
     window.__selectedStageId = null
     makeStepInvisible(4)
   } else {
@@ -147,8 +150,12 @@ function renderStageDetails (stage) {
 
   // set warning if needed
   var warning = document.querySelector('.step.s-3 .warning')
-  warning.style.display = buffer ? 'block' : 'none'
-  warning.innerHTML = "This is a buffer stage, so you can't register for this stage (yet)."
+  warning.style.display = (buffer || taken) ? 'block' : 'none'
+  if (buffer) {
+    warning.innerHTML = "This is a buffer stage, so you can't register for this stage (yet)."
+  } else if (taken) {
+    warning.innerHTML = "This stage is already registered by another team."
+  }
 
   // list details
   var details = document.querySelector('.step.s-3 .details')
