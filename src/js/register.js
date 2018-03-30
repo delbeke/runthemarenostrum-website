@@ -14,7 +14,7 @@ var monthToName = {
 }
 
 function requestStages (cbDone) {
-  var ApiBaseUrl = 'https://api.runthemarenostrum.com/stages'
+  var ApiBaseUrl = 'https://api.runthemarenostrum.com'
   var oReq = new window.XMLHttpRequest()
   oReq.addEventListener('readystatechange', function (data) {
     if (this.readyState === 4 && this.status === 200) {
@@ -94,7 +94,7 @@ function makeStageRow (container, stage, onClick) {
   stageBox._className = stageClass
   var leftSide = create(stageBox, 'div', 'left')
   create(leftSide, 'div', 'date', stage.startDate)
-  create(leftSide, 'div', 'stageid', 'ID: ' + stage.stageId)
+  create(leftSide, 'div', 'stageid', (buffer ? '' : 'Stage Nr: ') + stage.stageId)
   var rightSide = create(stageBox, 'div', 'right')
   create(rightSide, 'div', 'start', 'FROM: ' + stage.startCity)
   create(rightSide, 'div', 'stop', 'TO: ' + stage.stopCity)
@@ -120,6 +120,14 @@ function makeStepVisible (step) {
   }
 }
 
+function makeStepInvisible (step) {
+  var stepBox = document.querySelector('.step.s-' + step)
+  if (stepBox) {
+    stepBox.style.opacity = 0
+    stepBox.style.display = 'none'
+  }
+}
+
 function parseCoordinates (text) {
   text = text.split(', ')
   return { lat: parseFloat(text[0]), lng: parseFloat(text[1]) }
@@ -128,15 +136,51 @@ function parseCoordinates (text) {
 function renderStageDetails (stage) {
   makeStepVisible(3)
   makeStepVisible(4)
-  window.__selectedStageId = stage.stageId
+  var buffer = (stage.stageId.indexOf('BUFFER') >= 0)
+  if (buffer) {
+    window.__selectedStageId = null
+    makeStepInvisible(4)
+  } else {
+    window.__selectedStageId = stage.stageId
+    makeStepVisible(4)
+  }
+
+  // set warning if needed
+  var warning = document.querySelector('.step.s-3 .warning')
+  warning.style.display = buffer ? 'block' : 'none'
+  warning.innerHTML = "This is a buffer stage, so you can't register for this stage (yet)."
+
+  // list details
+  var details = document.querySelector('.step.s-3 .details')
+  var nodesToClear = details.querySelectorAll('.value')
+  for(var i = 0; i < nodesToClear.length; i++) {
+    var nodeToClear = nodesToClear[i]
+    nodeToClear.innerHTML = ''
+    nodeToClear.title = ''
+  }
+  var fields = Object.keys(stage)
+  for(var j = 0; j < fields.length; j++) {
+    var field = fields[j]
+    var value = stage[field]
+    if (typeof value === 'object' && typeof value.join === 'function') {
+      value = value.join(', ')
+    }
+    var node = details.querySelector('.' + field + ' .value')
+    if (node) {
+      node.innerHTML = value
+      node.title = value
+    }
+  }
+
   // scroll to map
-  window.scrollTo(0, document.querySelector('.map').offsetTop + (window.innerHeight / 3))
+  window.scrollTo(0, document.querySelector('.step.s-3 .map').offsetTop + (window.innerHeight / 3))
   if (window.__stages_map) {
     var map = window.__stages_map
     var startCx = parseCoordinates(stage.startPos)
     var stopCx = parseCoordinates(stage.stopPos)
     window.__stages_map_marker_start.setPosition(startCx)
     window.__stages_map_marker_stop.setPosition(stopCx)
+    window.__stages_map_marker_stop.setVisible(!buffer)
     map.setCenter({ lat: ((startCx.lat + stopCx.lat) / 2), lng: ((startCx.lng + stopCx.lng) / 2) })
     map.setZoom(9)
   }

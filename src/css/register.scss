@@ -38,29 +38,60 @@ section {
             background-repeat: no-repeat;
             background-position: center;
             & .step {
-              opacity: 0;
-              transition: opacity 500ms;
-              &.s-1 {
-                opacity: 1;
-                text-align: center;
-                & > .devider {
-                  border-bottom: solid 1px #ccc;
-                  width: 50px;
-                  margin: 10px auto;
+                opacity: 0;
+                transition: opacity 500ms;
+                &.s-1 {
+                    opacity: 1;
+                    text-align: center;
+                    &>.devider {
+                        border-bottom: solid 1px #ccc;
+                        width: 50px;
+                        margin: 10px auto;
+                    }
                 }
-              }
-              &.s-4 {
-                text-align: center;
-                &>BUTTON {
-                  cursor: pointer;
-                  margin: 10px auto;
-                  padding: 20px;
-                  color: white;
-                  border: transparent;
-                  background-color: #09aae2;
-              }
-              }
-
+                &.s-3 {
+                  display: none;
+                  margin-bottom: 2em;
+                  & .warning {
+                    margin: 2em 5%;
+                    text-align: center;
+                  }
+                  & .details {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    margin: 2em 5%;
+                    & > DIV {
+                      width: 400px;
+                      & .label {
+                        font-weight: bold;
+                        width: 130px;
+                        float: left;
+                      }
+                      & .value {
+                        width: 230px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding-right: 10px;
+                      }
+                    }
+                  }
+                }
+                &.s-4 {
+                    display: none;
+                    margin-bottom: 4em;
+                    text-align: center;
+                    &>BUTTON {
+                        cursor: pointer;
+                        margin: 10px auto;
+                        padding: 20px;
+                        color: white;
+                        border: transparent;
+                        background-color: #09aae2;
+                    }
+                }
                 & .title {
                     font-size: 2em;
                     text-align: center;
@@ -80,7 +111,7 @@ section {
                         border: transparent;
                         background-color: #09aae2;
                         &.selected {
-                          background-color: #2e4d58;
+                            background-color: #2e4d58;
                         }
                     }
                 }
@@ -111,16 +142,15 @@ section {
                             }
                         }
                         &.selected {
-                          background-color: #2e4d58;
-                        }
-
-                        &.buffer {
-                          background-color: #ddd;
-                          color: #000;
-                          &.selected {
-                            color: #fff;
                             background-color: #2e4d58;
-                          }
+                        }
+                        &.buffer {
+                            background-color: #ddd;
+                            color: #000;
+                            &.selected {
+                                color: #fff;
+                                background-color: #2e4d58;
+                            }
                         }
                     }
                 }
@@ -153,13 +183,21 @@ section {
                     }
                 }
             }
-            &.panel .stages>.stage {
+            &.panel .step {
+              & .stages>.stage {
+                &>.left {
+                  width: 100px;
+                }
                 & .date {
                     width: 80px;
                 }
                 & .location {
                     width: calc(100% - 80px);
                 }
+              }
+              & .s-3 .label {
+                width: 100px;
+              }
             }
         }
     }
