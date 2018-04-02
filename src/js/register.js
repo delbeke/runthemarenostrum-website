@@ -67,15 +67,16 @@ function filterByMonth (month, year, stages) {
 }
 
 function makeDateButton (container, text, value, onClick) {
-  var monthDiv = document.createElement('button')
-  monthDiv.textContent = text
-  container.appendChild(monthDiv)
-  monthDiv.addEventListener('click', function () {
+  var monthButton = document.createElement('button')
+  monthButton.textContent = text
+  monthButton.className = 'button'
+  container.appendChild(monthButton)
+  monthButton.addEventListener('click', function () {
     var buttons = container.querySelectorAll('button')
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].className = ''
+      buttons[i].className = 'button'
     }
-    monthDiv.className = 'selected'
+    monthButton.className = 'button selected'
     onClick(value)
   })
 }

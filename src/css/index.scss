@@ -12,6 +12,13 @@ a {
   text-decoration: unset;
 }
 
+.button {
+  border-radius: 6px;
+  background-color: #09aae2;
+  border: 0;
+  color: white;
+}
+
 nav {
     z-index: 100;
     position: absolute;
@@ -123,13 +130,9 @@ footer {
   }
 
   & .button {
-    background-color: #09aae2;
-    border: 0;
-    color: white;
     padding: 0 10px;
     height: 30px;
-    border-radius: 4px;
-  }
+ }
 
   & #mc_embed_signup {
     & > form {
