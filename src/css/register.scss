@@ -50,34 +50,34 @@ section {
                     }
                 }
                 &.s-3 {
-                  display: none;
-                  margin-bottom: 2em;
-                  & .warning {
-                    margin: 2em 5%;
-                    text-align: center;
-                  }
-                  & .details {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    margin: 2em 5%;
-                    & > DIV {
-                      width: 400px;
-                      & .label {
-                        font-weight: bold;
-                        width: 130px;
-                        float: left;
-                      }
-                      & .value {
-                        width: 230px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        padding-right: 10px;
-                      }
+                    display: none;
+                    margin-bottom: 2em;
+                    & .warning {
+                        margin: 2em 5%;
+                        text-align: center;
                     }
-                  }
+                    & .details {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        margin: 2em 5%;
+                        &>DIV {
+                            width: 400px;
+                            & .label {
+                                font-weight: bold;
+                                width: 130px;
+                                float: left;
+                            }
+                            & .value {
+                                width: 230px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                padding-right: 10px;
+                            }
+                        }
+                    }
                 }
                 &.s-4 {
                     display: none;
@@ -123,10 +123,12 @@ section {
                         cursor: pointer;
                         margin: 10px;
                         padding: 10px;
+                        height: 40px;
                         color: white;
                         background-color: #09aae2;
+                        position: relative;
                         &>.marker {
-                          width: 20px;
+                            width: 20px;
                         }
                         &>.left {
                             width: 140px;
@@ -151,6 +153,27 @@ section {
                                 color: #fff;
                                 background-color: #032D46;
                             }
+                        }
+                        & .triangle {
+                            position: absolute;
+                            width: 0;
+                            height: 0;
+                            border-top: 50px solid white;
+                            border-left: 50px solid transparent;
+                            top: 5px;
+                            right: 5px;
+                        }
+                        & .triangle-text {
+                            position: absolute;
+                            top: 5px;
+                            right: 5px;
+                            color: #032d46;
+                            width: 30px;
+                            height: 30px;
+                            transform: rotate(45deg);
+                            font-size: 8px;
+                            text-align: center;
+                            margin: 5px;
                         }
                     }
                 }
@@ -184,20 +207,29 @@ section {
                 }
             }
             &.panel .step {
-              & .stages>.stage {
-                &>.left {
-                  width: 100px;
+                & .stages>.stage {
+                    height: 30px;
+                    &>.left {
+                        width: 100px;
+                    }
+                    & .date {
+                        width: 80px;
+                    }
+                    & .location {
+                        width: calc(100% - 80px);
+                    }
+                    & .triangle {
+                        border-top: 40px solid white;
+                        border-left: 40px solid transparent;
+                    }
+                    & .triangle-text {
+                        font-size: 7px;
+                        margin: 2px;
+                    }
                 }
-                & .date {
-                    width: 80px;
+                & .s-3 .label {
+                    width: 100px;
                 }
-                & .location {
-                    width: calc(100% - 80px);
-                }
-              }
-              & .s-3 .label {
-                width: 100px;
-              }
             }
         }
     }

@@ -101,6 +101,10 @@ function makeStageRow (container, stage, onClick) {
   var rightSide = create(stageBox, 'div', 'right')
   create(rightSide, 'div', 'start', 'FROM: ' + stage.startCity)
   create(rightSide, 'div', 'stop', 'TO: ' + stage.stopCity)
+  if (taken) {
+    create(stageBox, 'div', 'triangle')
+    create(stageBox, 'div', 'triangle-text', 'Stage Taken')
+  }
   stageBox.addEventListener('click', function () {
     onClick(stage)
     var stageBoxes = container.querySelectorAll('.stage')
