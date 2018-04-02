@@ -1,0 +1,69 @@
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    font-size: 1.6rem;
+    &.slide {
+        height: 50vh;
+        &.hero {
+            min-height: 450px;
+            color: #ffffff;
+            background-color: #386272;
+            background-image: url(/images/rules.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            & .left {
+                position: absolute;
+                top: 25%;
+                left: 5%;
+                & .catchphrase {
+                    font-family: 'Cabin', sans-serif;
+                    letter-spacing: 0.3rem;
+                    font-size: 6.5rem;
+                    font-weight: bold;
+                    line-height: 0.93;
+                    margin-bottom: 50px;
+                    width: 60vw;
+                }
+            }
+        }
+        &.panel {
+            margin-top: 50px;
+            height: calc(100% - 400px);
+            overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            &.p-1 {
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    section {
+        &.slide {
+            &.hero {
+                & .left {
+                    position: relative;
+                    width: 90%;
+                    padding: 12vh 5% 0 5%;
+                    transform: unset;
+                    top: unset;
+                    left: unset;
+                    & .catchphrase {
+                        width: unset;
+                        margin-bottom: 15vh;
+                        &>div {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
