@@ -83,7 +83,7 @@ function makeDateButton (container, text, value, onClick) {
 
 function create (parent, tagName, className, content) {
   var el = document.createElement(tagName)
-  el.className = className
+  el.className = className || ''
   el.textContent = content || ''
   return parent.appendChild(el)
 }
@@ -163,24 +163,34 @@ function renderStageDetails (stage) {
   }
 
   // list details
+  var setNodeValue = function(node, value) {
+    var valueNode = node.querySelector('.value')
+    valueNode.innerHTML = value
+    valueNode.title = value
+  }
+
   var details = document.querySelector('.step.s-3 .details')
-  var nodesToClear = details.querySelectorAll('.value')
+  var nodesToClear = details.querySelectorAll('.details > div > div')
   for(var i = 0; i < nodesToClear.length; i++) {
     var nodeToClear = nodesToClear[i]
-    nodeToClear.innerHTML = ''
-    nodeToClear.title = ''
+    nodeToClear.style.display = 'none'
+    setNodeValue(nodeToClear, '')
   }
   var fields = Object.keys(stage)
+  var visibleNodeCount = 0
   for(var j = 0; j < fields.length; j++) {
     var field = fields[j]
     var value = stage[field]
-    if (typeof value === 'object' && typeof value.join === 'function') {
-      value = value.join(', ')
-    }
-    var node = details.querySelector('.' + field + ' .value')
-    if (node) {
-      node.innerHTML = value
-      node.title = value
+    if (value != null) {
+      if (typeof value === 'object' && typeof value.join === 'function') {
+        value = value.join(', ')
+      }
+      var node = details.querySelector('.' + field)
+      if (node) {
+        node.style.display = 'block'
+        setNodeValue(node, value)
+        visibleNodeCount++
+      }
     }
   }
 
@@ -220,9 +230,33 @@ function renderMonthsForYear (stages, year) {
   }
 }
 
+function padDatePart(nr) {
+  var txt = nr.toString()
+  if (txt.length === 1) {
+    txt = '0' + txt
+  }
+  return txt
+}
+
+function calculateStopDates (stages) {
+  var re = /(\d{2})-(\d{2})-(\d{4})/
+  for (var i = 0; i < stages.length; i++) {
+    if (stages[i].startDate) {
+      var parts = re.exec(stages[i].startDate)
+      if (parts && parts.length === 4) {
+        var startDate = new Date(parseInt(parts[3]), parseInt(parts[2]), parseInt(parts[1]))
+        var endDate = new Date(startDate.getTime())
+        endDate.setDate(startDate.getDate() + 1)
+        stages[i].stopDate = padDatePart(endDate.getDate()) + '-' + padDatePart(endDate.getMonth()) + '-' + endDate.getFullYear()
+      }
+    }
+  }
+}
+
 if (window.location.href.indexOf('/register') >= 0) {
   window.addEventListener('load', function () {
     requestStages(function (stages) {
+      calculateStopDates(stages)
       var years = getYears(stages)
       var yearContainer = document.querySelector('.years')
       for (var y = 0; y < years.length; y++) {

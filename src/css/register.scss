@@ -55,26 +55,29 @@ section {
                     & .warning {
                         margin: 2em 5%;
                         text-align: center;
+                        color: red;
                     }
                     & .details {
                         display: flex;
                         flex-direction: row;
                         flex-wrap: wrap;
-                        justify-content: center;
-                        margin: 2em 5%;
+                        justify-content: space-evenly;
+                        margin: 2em auto;
                         &>DIV {
-                            width: 400px;
-                            & .label {
-                                font-weight: bold;
-                                width: 130px;
-                                float: left;
-                            }
-                            & .value {
-                                width: 230px;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                padding-right: 10px;
+                          margin-top: 2em;
+                            &>DIV {
+                                width: 400px;
+                                & .label {
+                                    font-weight: bold;
+                                    width: 170px;
+                                    float: left;
+                                }
+                                & .value {
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    padding-right: 10px;
+                                }
                             }
                         }
                     }
