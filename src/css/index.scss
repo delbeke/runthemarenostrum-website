@@ -33,14 +33,14 @@ nav {
     transition: background-color 0ms;
     &.scrolled {
         position: fixed;
-        background-color: rgba(46, 77, 88, 0.8);
+        background-color: rgba(3, 45, 70, 0.8);
         padding: 15px 5% 15px 5%;
         transition: background-color 500ms;
     }
     & .side-bar {
       position: fixed;
       right: 0;
-      background: rgba(46, 77, 88, 0.95);
+      background: rgba(3, 45, 70, 0.95);
       top: 108px;
       opacity: 0;
       transform: translateX(100%);
@@ -50,7 +50,7 @@ nav {
         opacity: 1;
       }
       & div {
-        background: rgba(46, 77, 88, 1);
+        background: rgba(3, 45, 70, 1);
         font-weight: bold;
         padding: 10px;
       }
@@ -118,7 +118,7 @@ footer {
   flex-wrap: wrap;
   align-items: center;
   padding: 15px;
-  background-color: rgb(46, 77, 88);
+  background-color: rgb(3, 45, 70);
 
   &>div {
     flex:1;
