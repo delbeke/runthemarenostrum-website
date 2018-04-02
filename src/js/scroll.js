@@ -5,14 +5,17 @@ window.addEventListener('load', function () {
   })
 
   var $nav = document.querySelector('nav')
-  window.addEventListener('scroll', function () {
+  window.addEventListener('scroll', function (ev) {
     var st = window.scrollY
-    console.log(st)
-
     if ((mobile && st > 0) || (st > 24)) {
       $nav.className = 'scrolled'
     } else {
       $nav.className = ''
+    }
+    if (window.__noscroll) {
+      ev.preventDefault()
+      ev.returnValue = false
+      return false
     }
   })
 })
