@@ -14,9 +14,15 @@ a {
 
 .button {
   border-radius: 6px;
-  background-color: #09aae2;
+  background-color: #006989;
   border: 0;
   color: white;
+  transition: background-color 100ms;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #045f7b;
+  }
 }
 
 nav {
@@ -33,7 +39,7 @@ nav {
     transition: background-color 0ms;
     &.scrolled {
         position: fixed;
-        background-color: rgba(3, 45, 70, 0.8);
+        background-color: rgba(1, 45, 71, 0.8);
         padding: 15px 5% 15px 5%;
         transition: background-color 500ms;
     }
@@ -118,7 +124,7 @@ footer {
   flex-wrap: wrap;
   align-items: center;
   padding: 15px;
-  background-color: rgb(3, 45, 70);
+  background-color: #012d47;
 
   &>div {
     flex:1;

@@ -1,17 +1,21 @@
 var player = null
 var playerReady = false
 window.addEventListener('load', function () {
-  var playButton = document.querySelector('.play-desktop')
+  var playButton1 = document.querySelector('.play-desktop')
+  var playButton2 = document.querySelector('.play-mobile')
   var overlay = document.querySelector('.master-video-overlay')
-  if (playButton) {
+  var loading = overlay.querySelector('.loading-screen')
+  if (playButton1 && playButton2) {
     // insert Youtube API tag
     var tag = document.createElement('script')
     tag.src = "https://www.youtube.com/iframe_api"
     var firstScriptTag = document.getElementsByTagName('script')[0]
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
-    playButton.parentNode.addEventListener('click', function () {
+    var onPlayClick = function () {
       if (player) {
+        loading.style.opacity = 1
+        loading.style.display = 'block'
         calculatePlayerContainerSize()
         overlay.style.display = 'block'
         window.__noscroll = true
@@ -26,7 +30,9 @@ window.addEventListener('load', function () {
         }
         delay()
       }
-    })
+    }
+    playButton1.addEventListener('click', onPlayClick)
+    playButton2.addEventListener('click', onPlayClick)
   }
   var closeButton = document.querySelector('.master-video-overlay .close')
   if (closeButton) {
@@ -71,8 +77,14 @@ function onPlayerReady (event) {
 }
 
 function onPlayerStateChange (event) {
-  if (event.data == YT.PlayerState.ENDED) {
-    var overlay = document.querySelector('.master-video-overlay')
+  var overlay = document.querySelector('.master-video-overlay')
+  if (event.data === YT.PlayerState.PLAYING) {
+    var loading = overlay.querySelector('.loading-screen')
+    loading.style.opacity = 0
+    setTimeout(function () {
+      loading.style.display = 'none'
+    }, 500)
+  } else  if (event.data == YT.PlayerState.ENDED) {
     overlay.style.display = 'none'
     window.__noscroll = false
   }
@@ -87,7 +99,7 @@ function onYouTubeIframeAPIReady() {
       showinfo: 0,
       playsinline: 1
     },
-    videoId: 'TyudHh6EaUU',
+    videoId: 'IJPOW9OUyk4',
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
