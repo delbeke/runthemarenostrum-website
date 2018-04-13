@@ -109,9 +109,9 @@ section {
                         padding: 10px;
                         color: white;
                         border: transparent;
-                        background-color: #09aae2;
+                        background-color: #006989;
                         &.selected {
-                            background-color: #032D46;
+                            background-color: #012d47;
                         }
                     }
                 }
@@ -128,7 +128,7 @@ section {
                         padding: 10px;
                         height: 40px;
                         color: white;
-                        background-color: #09aae2;
+                        background-color: #006989;
                         position: relative;
                         &>.marker {
                             width: 20px;
@@ -147,14 +147,14 @@ section {
                             }
                         }
                         &.selected {
-                            background-color: #032D46;
+                            background-color: #012d47;
                         }
                         &.buffer {
                             background-color: #ddd;
                             color: #000;
                             &.selected {
                                 color: #fff;
-                                background-color: #032D46;
+                                background-color: #012d47;
                             }
                         }
                         & .triangle {
