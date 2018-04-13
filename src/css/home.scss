@@ -423,6 +423,11 @@ section {
     }
 }
 
+@media only screen and (max-height: 450px) {
+  section.slide.panel .content .title>img {
+    margin-top: 0;
+}
+}
 
 @keyframes pulse {
   0% {
