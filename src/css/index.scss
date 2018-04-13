@@ -175,7 +175,7 @@ footer {
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px), screen and (max-height: 450px) {
   html,
   body {
       font-size: 45%;
@@ -192,5 +192,12 @@ footer {
       & .register {
         display: none;
       }
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  html,
+  body {
+      font-size: 40%;
   }
 }
