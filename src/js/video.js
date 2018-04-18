@@ -4,7 +4,6 @@ window.addEventListener('load', function () {
   var playButton1 = document.querySelector('.play-desktop')
   var playButton2 = document.querySelector('.play-mobile')
   var overlay = document.querySelector('.master-video-overlay')
-  var loading = overlay.querySelector('.loading-screen')
   if (playButton1 && playButton2) {
     // insert Youtube API tag
     var tag = document.createElement('script')
@@ -12,6 +11,7 @@ window.addEventListener('load', function () {
     var firstScriptTag = document.getElementsByTagName('script')[0]
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
+    var loading = overlay.querySelector('.loading-screen')
     var onPlayClick = function () {
       if (player) {
         loading.style.opacity = 1
