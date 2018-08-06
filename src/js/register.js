@@ -13,8 +13,9 @@ var monthToName = {
   '12': 'December'
 }
 
+var ApiBaseUrl = 'https://api.runthemarenostrum.com'
+
 function requestStages (cbDone) {
-  var ApiBaseUrl = 'https://api.runthemarenostrum.com'
   var oReq = new window.XMLHttpRequest()
   oReq.addEventListener('readystatechange', function (data) {
     if (this.readyState === 4 && this.status === 200) {
@@ -23,6 +24,26 @@ function requestStages (cbDone) {
   })
   oReq.open('GET', ApiBaseUrl + '/stages/')
   oReq.send()
+}
+
+function requestStageDetails (stageId, cbDone) {
+  var oReq = new window.XMLHttpRequest()
+  oReq.addEventListener('readystatechange', function (data) {
+    if (this.readyState === 4 && this.status === 200) {
+      cbDone(JSON.parse(this.responseText))
+    }
+  })
+  oReq.open('GET', ApiBaseUrl + '/stages/' + stageId)
+  oReq.send()
+}
+
+function htmlEscape(str) {
+  return str
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 }
 
 function getYears (stages) {
@@ -159,7 +180,21 @@ function renderStageDetails (stage) {
   if (buffer) {
     warning.innerHTML = "This is a buffer stage, so you can't register for this stage (yet)."
   } else if (taken) {
-    warning.innerHTML = "This stage is already registered by another team."
+    warning.innerHTML = "Loading info..."
+    requestStageDetails(stage.stageId, (details => {
+      var team = details.officialTeam
+      var html = 'This stage is taken by team "' + htmlEscape(team.name) + '" with '
+      html += team.members.length + (team.members.length === 1 ? ' member' : ' members') + ': '
+      for (let i = 0; i < team.members.length; i++) {
+        var member = team.members[i]
+        var country = htmlEscape(member.country || '')
+        html += htmlEscape(member.firstName) + ' (<span title="' + country + '" class="flag-icon flag-icon-' + country.toLowerCase() + '"></span>), '
+      }
+      if (team.members.length > 0) {
+        html = html.substring(0, html.length - 2)
+      }
+      warning.innerHTML = html + '.'
+    }))
   }
 
   // list details
