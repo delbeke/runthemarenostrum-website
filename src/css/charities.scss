@@ -31,7 +31,7 @@ section {
         }
         &.panel {
             margin-top: 50px;
-            height: calc(100% - 400px);
+            height: unset;
             overflow: hidden;
             position: relative;
             background-size: cover;
@@ -39,6 +39,123 @@ section {
             background-position: center;
             &.p-1 {
                 text-align: center;
+            }
+            & .content {
+                margin: 0 auto;
+                width: 100%;
+                max-width: 716px;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                & .title {
+                    flex: 1;
+                    text-transform: lowercase;
+                    letter-spacing: 0.1rem;
+                    font-size: 4.2rem;
+                    font-weight: bold;
+                    line-height: 1.33;
+                    padding-left: 5%;
+                    padding-right: 5%;
+                }
+                & .description {
+                    flex: 1;
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    line-height: 1.6;
+                    padding-left: 5%;
+                    padding-right: 5%;
+                    &>div {
+                        margin-bottom: 2rem;
+                        &:last-child {
+                            margin-bottom: 0em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.item-container {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        & hr {
+            width: 10rem;
+            height: 1px;
+            border: none;
+            border-top: 1px solid #fff;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+        & .item {
+            cursor: pointer;
+            margin: 20px;
+            width: 400px;
+            height: 650px;
+            font-size: 11px;
+            border: solid 1px #006989;
+            border-radius: 6px;
+            background-color: #fff;
+            &:hover {
+                & .item-default {
+                    display: none;
+                }
+                & .item-hover {
+                    display: block;
+                }
+            }
+        }
+        & .item-default,
+        & .item-hover {
+            width: 100%;
+            height: 100%;
+        }
+        & .item-default {
+            &>.logo {
+                border-radius: 6px 6px 0 0;
+                height: 400px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            & .name {
+                color: white;
+                font-size: 4em;
+                line-height: 200px;
+                background-color: #006989;
+            }
+            & .label {
+                border-radius: 0 0 6px 6px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 2em;
+            }
+        }
+        & .item-hover {
+            display: none;
+            background-color: #006989;
+            color: white;
+            & .name {
+                font-size: 4em;
+                line-height: 2em;
+            }
+            & .address {
+                margin-top: 2em;
+            }
+            & .description {
+                margin-top: 2em;
+                padding: 0 4em;
+            }
+            & .purpose {
+                margin-top: 2em;
+            }
+            & .website {
+                margin-top: 2em;
+            }
+            & .contact {
+                margin-top: 2em;
+            }
+            & .social {
+                margin-top: 4em;
             }
         }
     }
