@@ -26,19 +26,19 @@
           to. Click on a charity to discover more.
         </p>
         <p>
-            We are working on a solution to support these charities.<br /> Coming Soon.
+            We are working on a solution to let you easily donate to support these charities.<br /> Coming Soon.
           </p>
       </div>
     </div>
   </section>
   <section class='slide panel item-container'>
-    <div class="item">
+    <div id="tout-bien" class="item">
       <div class="item-default">
         <div class="logo" style="background-image: url(images/charities/logo-hey-hoe-gaat-het-nl.jpg)"></div>
         <div class="name">Tout Bien</div>
         <div class="label">Mental</div>
       </div>
-      <div class="item-hover">
+      <div class="item-hover" style="display:none;">
         <div class="name">Tout Bien</div>
         <div class="address">Maaltemeers 84, 9051 Gent België</div>
         <div class="description">
@@ -60,6 +60,20 @@
         </div>
       </div>
     </div>
+    <script>
+      var onToggle =  function (evt) {
+        var innerDivs = evt.currentTarget.children
+        for (let i = 0; i < innerDivs.length; i++) {
+          const div = innerDivs[i];
+          if (div.style.display === 'none') {
+            div.style.display = 'block'
+          } else {
+            div.style.display = 'none'
+          }
+        }
+      }
+      document.getElementById('tout-bien').addEventListener('click', onToggle);
+    </script>
   </section>
   <!-- build:footer -->
   <!-- endbuild -->

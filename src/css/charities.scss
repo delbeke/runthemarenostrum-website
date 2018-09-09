@@ -96,14 +96,6 @@ section {
             border: solid 1px #006989;
             border-radius: 6px;
             background-color: #fff;
-            &:hover {
-                & .item-default {
-                    display: none;
-                }
-                & .item-hover {
-                    display: block;
-                }
-            }
         }
         & .item-default,
         & .item-hover {
