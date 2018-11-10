@@ -34,7 +34,7 @@ gulp.task('svg', () =>
 )
 
 gulp.task('png', () =>
-  gulp.src('src/images/*.png')
+  gulp.src('src/images/**/*.png')
     .pipe(gulp.dest('build/images'))
 )
 

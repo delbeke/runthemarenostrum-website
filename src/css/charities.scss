@@ -86,9 +86,14 @@ section {
             height: 1px;
             border: none;
             border-top: 1px solid #fff;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
+
+        & .subtitle {
+          font-weight: bold;
+        }
+
         & .item {
             cursor: pointer;
             margin: 20px;
@@ -110,10 +115,11 @@ section {
                 height: 400px;
                 background-repeat: no-repeat;
                 background-position: center;
+                background-size: contain;
             }
             & .name {
                 color: white;
-                font-size: 4em;
+                font-size: 3.5em;
                 height: 3.7em;
                 padding: 0.4em;
                 background-color: #006989;
@@ -131,7 +137,6 @@ section {
             color: white;
             & .name {
                 font-size: 4em;
-                height: 3.7em;
                 padding: 0.4em;
             }
             & .address {
@@ -139,10 +144,11 @@ section {
             }
             & .description {
                 margin-top: 2em;
-                padding: 0 4em;
+                padding: 0 2em;
             }
             & .purpose {
                 margin-top: 2em;
+                padding: 0 2em;
             }
             & .website {
                 margin-top: 2em;
@@ -155,6 +161,105 @@ section {
             }
         }
     }
+}
+
+section.donate-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.6);
+
+  & input,
+  & select {
+    padding: 3px;
+    border: thin solid #d4d4d4;
+  }
+
+  & input {
+    width: 90px;
+    margin-right: 5px;
+  }
+
+  & select {
+    width: 114px;
+  }
+
+  & span.close {
+    position: absolute;
+    background-image: url(/images/charities/close.png);
+    background-position: 4px 4px;
+    background-size: 17px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    right: 6px;
+    top: 6px;
+  }
+
+  & > .popup-inner {
+    background-color: white;
+    position: absolute;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    box-shadow: 0 12px 30px 0 rgba(0,0,0,.5), inset 0 1px 0 0 hsla(0,0%,100%,.65);
+    background-color: #f5f5f7;
+
+    & > div {
+      margin: 16px;
+      text-align: center;
+    }
+  }
+
+  & .form-row {
+    font-size: 12px;
+    border: 1px solid #e3e3e3;
+    box-shadow: 0 1px 0 hsla(0,0%,100%,.7), inset 0 1px 0 hsla(0,0%,100%,.7);
+    border-radius: 6px;
+    padding: 10px 0;
+    margin: 16px 0;
+    & div {
+      margin-bottom: 10px;
+    }
+    & label {
+      margin: 0 5px;
+    }
+    & INPUT {
+      margin: 5px 0;
+    }
+  }
+
+  & .form-row-submit {
+    & > P {
+      font-size: 10px;
+    }
+  }
+
+  & BUTTON {
+    height: 37px;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #3ea8e5;
+    background-image: linear-gradient(-180deg,#44b1e8,#3098de);
+    box-shadow: 0 1px 0 0 rgba(46,86,153,.15), inset 0 1px 0 0 rgba(46,86,153,.1), inset 0 -1px 0 0 rgba(46,86,153,.4);
+    font-size: 17px;
+    line-height: 21px;
+    font-weight: 700;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+    color: #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    border: 0;
+
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -178,5 +283,8 @@ section {
                 }
             }
         }
+        &.item-container .item-hover .name {
+          font-size: 2.5em;
+      }
     }
 }
