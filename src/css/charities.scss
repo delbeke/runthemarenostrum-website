@@ -259,6 +259,10 @@ section.donate-popup {
     &:not(:first-child) {
       margin-top: 8px;
     }
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 

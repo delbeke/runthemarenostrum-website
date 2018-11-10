@@ -230,7 +230,7 @@
             EURO
           </div>
           <div class="form-row-submit">
-            <button id="btnDonate">Donate!</button>
+            <button id="btnDonate" disabled>Donate!</button>
             <p>Payment will be processed by Stripe.</p>
           </div>
       </div>
@@ -282,7 +282,7 @@
 
   <script>
     var $id = function (id) {  return document.getElementById(id) }
-    var $qs = function (qs) {  return document.querySelector(id) }
+    var $qs = function (qs) {  return document.querySelector(qs) }
 
     var ApiBaseUrl = 'https://api.runthemarenostrum.com'
 
@@ -347,7 +347,7 @@
         });
     }
 
-    btnDonate.addEventListener('click', function () {
+    btnDonate.addEventListener('click', function (e) {
       dlgDonate.style.display = 'none'
       amount = parseInt(txtAmount.value)
       selectedStage = ddStages.options[ddStages.selectedIndex].value
@@ -375,9 +375,18 @@
       amount = 0
     })
 
-    txtAmount.addEventListener('keyup', function (e) {
+    var onAmountChange = function (e) {
       this.value = this.value.replace(/[^\d]/,'')
-    })
+      if (parseInt(this.value) > 0) {
+        btnDonate.removeAttribute('disabled')
+      } else {
+        btnDonate.setAttribute('disabled', 'disabled')
+      }
+    }
+
+    txtAmount.addEventListener('keyup', onAmountChange)
+    txtAmount.addEventListener('blur', onAmountChange)
+    txtAmount.addEventListener('paste', onAmountChange)
 
     $qs('#dlgDonate .close').addEventListener('click', function () {
       dlgDonate.style.display = 'none'
