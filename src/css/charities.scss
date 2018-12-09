@@ -92,15 +92,17 @@ section {
 
         & .subtitle {
           font-weight: bold;
+          font-size: 14px;
+          margin-bottom: 6px;
         }
 
         & .item {
             cursor: pointer;
             margin: 20px;
             width: 400px;
-            height: 650px;
+            height: 600px;
             font-size: 11px;
-            border: solid 1px #006989;
+            border: solid 4px #006989;
             border-radius: 6px;
             background-color: #fff;
         }
@@ -112,52 +114,69 @@ section {
         & .item-default {
             &>.logo {
                 border-radius: 6px 6px 0 0;
-                height: 400px;
+                height: 300px;
+                margin: 50px;
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: contain;
             }
             & .name {
                 color: white;
-                font-size: 3.5em;
+                font-size: 2.5em;
                 height: 3.7em;
                 padding: 0.4em;
                 background-color: #006989;
+                display: table;
+                width: calc(100% - 0.8em + 4px);
+                & > div {
+                  display: table-cell;
+                  vertical-align: middle;
+                  text-align: center;
+                }
             }
             & .label {
                 border-radius: 0 0 6px 6px;
-                height: 50px;
-                line-height: 50px;
-                font-size: 2em;
+                height: 72px;
+                line-height: 72px;
+                font-size: 1.5em;
             }
         }
         & .item-hover {
             display: none;
             background-color: #006989;
             color: white;
+            position: relative;
             & .name {
-                font-size: 4em;
+                font-size: 3.5em;
                 padding: 0.4em;
+                height: 100px;
             }
             & .address {
                 margin-top: 2em;
             }
-            & .description {
-                margin-top: 2em;
-                padding: 0 2em;
-            }
-            & .purpose {
-                margin-top: 2em;
-                padding: 0 2em;
-            }
-            & .website {
-                margin-top: 2em;
-            }
-            & .contact {
-                margin-top: 2em;
-            }
             & .social {
-                margin-top: 4em;
+                margin-top: 0;
+                height: 50px;
+                & > A {
+                  margin: 0 8px;
+                }
+            }
+            & .info {
+              font-size: 12px;
+              line-height: 18px;
+              position: absolute;
+              height: 350px;
+              width: 100%;
+              overflow-y: auto;
+
+              & > .description {
+                margin-top: 2em;
+                padding: 0 2em;
+              }
+              & > .purpose {
+                  margin-top: 2em;
+                  padding: 0 2em;
+              }
             }
         }
     }
