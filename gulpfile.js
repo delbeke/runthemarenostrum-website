@@ -73,6 +73,11 @@ gulp.task('fonts', () =>
     .pipe(gulp.dest('build/fonts'))
 )
 
+gulp.task('downloads', () =>
+  gulp.src('src/download/*.*')
+    .pipe(gulp.dest('build/download'))
+)
+
 gulp.task('reload', () => {
   return gulp.src('src/*.html')
     .pipe(connect.reload())
@@ -88,4 +93,4 @@ gulp.task('watch', ['connect', 'default'], () => {
   })
 })
 
-gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png', 'maps', 'fonts'])(cb))
+gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png', 'maps', 'fonts', 'downloads'])(cb))
