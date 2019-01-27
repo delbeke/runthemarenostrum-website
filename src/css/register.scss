@@ -37,6 +37,14 @@ section {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+
+            & .explainer {
+              margin: 0 auto;
+              width: 100%;
+              max-width: 716px;
+              text-align: center;
+            }
+
             & .step {
                 opacity: 0;
                 transition: opacity 500ms;
