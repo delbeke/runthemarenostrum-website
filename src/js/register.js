@@ -19,7 +19,8 @@ function requestStages (cbDone) {
   var oReq = new window.XMLHttpRequest()
   oReq.addEventListener('readystatechange', function (data) {
     if (this.readyState === 4 && this.status === 200) {
-      cbDone(JSON.parse(this.responseText))
+      var receivedStages = JSON.parse(this.responseText)
+      cbDone(receivedStages.filter(s => s.hide !== true))
     }
   })
   oReq.open('GET', ApiBaseUrl + '/stages/')
