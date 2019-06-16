@@ -186,6 +186,18 @@ footer {
       margin: 0 16px;
     }
   }
+
+  & > .footer-sponsor {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0 15px 15px 15px;
+    height: 3rem;
+
+    & > a > .logo {
+      width: 7rem;
+      vertical-align: text-bottom;
+    }
+  }
 }
 
 @media only screen and (max-width: 768px), screen and (max-height: 450px) {

@@ -33,6 +33,7 @@
   <section class='slide panel item-container'>
 
     <div id="tout-bien" class="item">
+      <button type="button" id="donate-tout-bien">Donate</button>
       <div class="item-default">
         <div class="logo" style="background-image: url(images/charities/logo-hey-hoe-gaat-het-nl.jpg)"></div>
         <div class="name"><div>Tout Bien</div></div>
@@ -68,6 +69,7 @@
     </div>
 
     <div id="plasticsoupsurfer" class="item">
+      <button type="button" id="donate-plasticsoupsurfer">Donate</button>
       <div class="item-default">
         <div class="logo" style="background-image: url(images/charities/surfer.jpg)"></div>
         <div class="name"><div>Plastic Soup Surfer</div></div>
@@ -100,6 +102,7 @@
     </div>
 
     <div id="properstrandlopers" class="item">
+      <button type="button" id="donate-properstrandlopers">Donate</button>
       <div class="item-default">
         <div class="logo" style="background-image: url(images/charities/properstrandlopers.jpg)"></div>
         <div class="name"><div>Proper Strand Lopers</div></div>
@@ -144,6 +147,7 @@
     </div>
 
     <div id="libertyhome" class="item">
+      <button type="button" id="donate-libertyhome">Donate</button>
       <div class="item-default">
         <div class="logo" style="background-image: url(images/charities/libertylogo.png)"></div>
         <div class="name"><div>Liberty Home Addiction Care</div></div>
@@ -209,7 +213,7 @@
 
   <section id="dlgDonate" class="donate-popup" style="display:none;">
     <div class="popup-inner">
-      <div id='txtCharityName'>Proper Strand Lopers</div>
+      <div id='txtCharityName'>...</div>
       <span class="close" aria-label="Close"></span>
       <div>
           <div class="form-row">
@@ -281,6 +285,7 @@
     var ApiBaseUrl = 'https://api.runthemarenostrum.com'
 
     var dlgDonate = $id("dlgDonate")
+    var txtCharityName = $id("txtCharityName")
     var dlgWireTransfer = $id("dlgWireTransfer")
     var dlgThanks = $id("dlgThanks")
 
@@ -345,8 +350,11 @@
       /*image: 'https://stripe.com/img/documentation/checkout/marketplace.png',*/
       locale: 'auto',
       token: function(token) {
-        dlgThanks.style.display = 'block'
+        postJson(ApiBaseUrl + '', {
 
+        }, function () {
+          dlgThanks.style.display = 'block'
+        })
       }
     })
 
@@ -410,6 +418,36 @@
       amount = 0
     })
 
+    // wire up the buttons
+    /*
+    document.getElementById('donate-tout-bien').addEventListener('click', function (evt) {
+      evt.preventDefault()
+      txtCharityName.innerHTML = 'Tout Bien'
+      charityName = 'tout-bien'
+      dlgDonate.style.display = 'block'
+    });
+
+    document.getElementById('donate-plasticsoupsurfer').addEventListener('click', function (evt) {
+      evt.preventDefault()
+      txtCharityName.innerHTML = 'Plastic Soup Surfer'
+      charityName = 'plasticsoupsurfer'
+      dlgDonate.style.display = 'block'
+    });
+
+    document.getElementById('properstrandlopers').addEventListener('click', function (evt) {
+      evt.preventDefault()
+      txtCharityName.innerHTML = 'Proper Strand Lopers'
+      charityName = 'properstrandlopers'
+      dlgDonate.style.display = 'block'
+    });
+
+    document.getElementById('libertyhome').addEventListener('click', function (evt) {
+      evt.preventDefault()
+      txtCharityName.innerHTML = 'Liberty Home'
+      charityName = 'libertyhome'
+      dlgDonate.style.display = 'block'
+    });
+    */
   </script>
 
   <!-- build:footer -->

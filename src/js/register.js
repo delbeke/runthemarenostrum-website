@@ -246,7 +246,6 @@ function renderStageDetails (stage) {
 
 function renderStages (stages) {
   var stagesContainer = document.querySelector('.stages')
-  document.getElementById('explainer_stagecount').innerHTML = stages.filter(i => i.stageId.indexOf('BUFFER') === -1).length
   return function (dateObj) {
     makeStepVisible(2)
     stagesContainer.innerHTML = ''

@@ -2,6 +2,12 @@ html {
     scroll-behavior: smooth;
 }
 
+button {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
 section {
     font-size: 1.6rem;
     &.slide {
@@ -97,6 +103,7 @@ section {
         }
 
         & .item {
+            position: relative;
             cursor: pointer;
             margin: 20px;
             width: 400px;
@@ -105,6 +112,24 @@ section {
             border: solid 4px #006989;
             border-radius: 6px;
             background-color: #fff;
+
+            & BUTTON {
+              position: absolute;
+              top: 1rem;
+              right: 1rem;
+              margin: 10px;
+              padding: 10px;
+              cursor: pointer;
+              color: #fff;
+              border: transparent;
+              border-radius: 1rem;
+              background-color: #006989;
+              font-size: 2rem;
+
+              &:hover {
+                background-color: #045f7b;
+              }
+            }
         }
         & .item-default,
         & .item-hover {
