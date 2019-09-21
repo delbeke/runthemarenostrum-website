@@ -1,4 +1,4 @@
-const gulp = require('gulp')
+const { series, parallel, src, dest, watch } = require('gulp')
 const sass = require('gulp-sass')
 const minifyCSS = require('gulp-csso')
 const concat = require('gulp-concat')
@@ -10,87 +10,92 @@ const imageResize = require('gulp-image-resize')
 const del = require('del')
 const htmlreplace = require('gulp-html-replace')
 
-gulp.task('connect', () => {
-  connect.server({
-    root: 'build',
-    livereload: true
-  })
-})
+function clean() {
+    return del(['build/**/*'])
+}
 
-gulp.task('clean', () => {
-  return del(['build/**/*'])
-})
+function images() {
+    return src('src/images/**/*.jpg')
+        .pipe(imagemin())
+        .pipe(dest('build/images'))
+}
 
-gulp.task('images', () =>
-  gulp.src('src/images/**/*.jpg')
-    // .pipe(imageResize({ width: 1500, crop: false, upscale: false }))
-    .pipe(imagemin())
-    .pipe(gulp.dest('build/images'))
-)
+function svg() {
+    return src('src/images/*.svg')
+        .pipe(dest('build/images'))
+}
 
-gulp.task('svg', () =>
-  gulp.src('src/images/*.svg')
-    .pipe(gulp.dest('build/images'))
-)
+function png() {
+    return src('src/images/**/*.png')
+        .pipe(dest('build/images'))
+}
 
-gulp.task('png', () =>
-  gulp.src('src/images/**/*.png')
-    .pipe(gulp.dest('build/images'))
-)
+function html() {
+    return src(['src/*.html', 'src/*.ico'])
+        .pipe(htmlreplace({
+            'header': { src: src('src/blocks/header.html') },
+            'menu': { src: src('src/blocks/menu.html') },
+            'footer': { src: src('src/blocks/footer.html') }
+        }))
+        .pipe(dest('build/'))
+}
 
-gulp.task('html', () => {
-  return gulp.src(['src/*.html', 'src/*.ico'])
-    .pipe(htmlreplace({
-      'header': { src: gulp.src('src/blocks/header.html') },
-      'menu': { src: gulp.src('src/blocks/menu.html') },
-      'footer': { src: gulp.src('src/blocks/footer.html') }
-    }))
-    .pipe(gulp.dest('build/'))
-})
+function css() {
+    return src('src/css/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(minifyCSS())
+        .pipe(dest('build/css'))
+}
 
-gulp.task('css', () => {
-  return gulp.src('src/css/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('build/css'))
-})
+function js() {
+    return src('src/js/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(concat('app.min.js'))
+        .pipe(sourcemaps.write())
+        .pipe(dest('build/js'))
+}
 
-gulp.task('js', () => {
-  return gulp.src('src/js/*.js')
-    .pipe(sourcemaps.init())
-    .pipe(concat('app.min.js'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('build/js'))
-})
+function maps() {
+    return src('src/maps/*.kmz')
+        .pipe(dest('build/maps'))
+}
 
-gulp.task('maps', () =>
-  gulp.src('src/maps/*.kmz')
-    .pipe(gulp.dest('build/maps'))
-)
+function fonts() {
+    return src('src/fonts/*.*')
+        .pipe(dest('build/fonts'))
+}
 
-gulp.task('fonts', () =>
-  gulp.src('src/fonts/*.*')
-    .pipe(gulp.dest('build/fonts'))
-)
+function downloads() {
+    return src('src/download/*.*')
+        .pipe(dest('build/download'))
+}
 
-gulp.task('downloads', () =>
-  gulp.src('src/download/*.*')
-    .pipe(gulp.dest('build/download'))
-)
-
-gulp.task('reload', () => {
-  return gulp.src('src/*.html')
-    .pipe(connect.reload())
-})
-
-gulp.task('watch', ['connect', 'default'], () => {
-  gulp.watch('src/**/*', () => {
-    seq('default', 'reload')((err) => {
-      if (err) {
-        console.error(err)
-      }
+function server() {
+    connect.server({
+        root: 'build',
+        livereload: true
     })
-  })
-})
+}
 
-gulp.task('default', (cb) => seq('clean', ['html', 'css', 'js', 'images', 'svg', 'png', 'maps', 'fonts', 'downloads'])(cb))
+function reload() {
+    return src('src/*.html')
+        .pipe(connect.reload())
+}
+
+function startWatch() {
+    server()
+    startDefault()
+    const watcher = watch('src/**/*')
+    watcher.on('change', () => {
+        return series(startDefault, reload)((err) => {
+            if (err) {
+                console.error(err)
+            }
+        })
+    })
+}
+
+const startDefault = series(clean, parallel(html, css, js, images, svg, png, maps, fonts, downloads))
+
+exports.watch = startWatch
+exports.default = startDefault
