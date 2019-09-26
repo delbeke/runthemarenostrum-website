@@ -296,7 +296,11 @@ if (window.location.href.indexOf('/register') >= 0) {
       var years = getYears(stages)
       var yearContainer = document.querySelector('.years')
       for (var y = 0; y < years.length; y++) {
-        makeDateButton(yearContainer, years[y], years[y], function (year) {
+        var text = years[y]
+        if (text === "2020") {
+          text = "Part 3 - 2020"
+        }
+        makeDateButton(yearContainer, text, years[y], function (year) {
           renderMonthsForYear(stages, year)
         })
       }
