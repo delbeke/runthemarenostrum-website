@@ -297,7 +297,9 @@ if (window.location.href.indexOf('/register') >= 0) {
       var yearContainer = document.querySelector('.years')
       for (var y = 0; y < years.length; y++) {
         var text = years[y]
-        if (text === "2020") {
+        if (text === "2019") {
+          text = "Part 1/2 - 2019"
+        } else if (text === "2020") {
           text = "Part 3 - 2020"
         }
         makeDateButton(yearContainer, text, years[y], function (year) {
