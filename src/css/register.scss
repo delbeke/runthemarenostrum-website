@@ -46,7 +46,7 @@ section {
           }
 
             & .explainer {
-              margin: 0 auto;
+              margin: 3rem auto 0 auto;
               width: 100%;
               max-width: 716px;
               text-align: center;
@@ -87,6 +87,10 @@ section {
                         border-bottom: solid 1px #ccc;
                         width: 50px;
                         margin: 10px auto;
+                    }
+                    &>.warning {
+                        color: red;
+                        margin-top: 1rem;
                     }
                 }
                 &.s-3 {

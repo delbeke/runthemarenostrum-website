@@ -88,10 +88,10 @@ function filterByMonth (month, year, stages) {
   return result
 }
 
-function makeDateButton (container, text, value, onClick) {
+function makeDateButton (container, text, selected, value, onClick) {
   var monthButton = document.createElement('button')
   monthButton.textContent = text
-  monthButton.className = 'button'
+  monthButton.className = 'button' + (selected ? ' selected' : '')
   container.appendChild(monthButton)
   monthButton.addEventListener('click', function () {
     var buttons = container.querySelectorAll('button')
@@ -259,10 +259,14 @@ function renderStages (stages) {
 function renderMonthsForYear (stages, year) {
   var months = getMonths(stages, year)
   var monthContainer = document.querySelector('.months')
+  var stagerenderer = renderStages(stages)
   monthContainer.innerHTML = ''
   for (var m = 0; m < months.length; m++) {
     var fullNameMonth = monthToName[months[m]] || months[m]
-    makeDateButton(monthContainer, fullNameMonth, {year: year, month: months[m]}, renderStages(stages))
+    makeDateButton(monthContainer, fullNameMonth, (m === 0), {year: year, month: months[m]}, stagerenderer)
+    if (m === 0) {
+      stagerenderer({year: year, month: months[m]})
+    }
   }
 }
 
@@ -289,6 +293,16 @@ function calculateStopDates (stages) {
   }
 }
 
+function onYearClicked (data) {
+  renderMonthsForYear(data.stages, data.year)
+  var lblWarning = document.querySelector('div.step.s-1 > div.warning')
+  if (parseInt(data.year) < 2020) {
+    lblWarning.innerHTML = 'The below Stages have been finished. <br> Please have a look at May 2020 for the upcoming Stages.'
+  } else {
+    lblWarning.innerHTML = ''
+  }
+}
+
 if (window.location.href.indexOf('/register') >= 0) {
   window.addEventListener('load', function () {
     requestStages(function (stages) {
@@ -302,11 +316,9 @@ if (window.location.href.indexOf('/register') >= 0) {
         } else if (text === "2020") {
           text = "Part 3 - 2020"
         }
-        makeDateButton(yearContainer, text, years[y], function (year) {
-          renderMonthsForYear(stages, year)
-        })
+        makeDateButton(yearContainer, text, (years[y] === '2020') , { stages: stages, year: years[y] }, onYearClicked)
       }
-      renderMonthsForYear(stages, years[0])
+      renderMonthsForYear(stages, years[1])
       // (pre)load map
       var start = stages[0].startPos.split(', ')
       var mapContainer = document.querySelector('.map')
