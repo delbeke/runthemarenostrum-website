@@ -244,9 +244,21 @@ function renderStageDetails (stage) {
   }
 }
 
+function showFinishedWarning (data) {
+  var lblWarning = document.querySelector('div.step.s-1 > div.warning')
+  var year = parseInt(data.year)
+  var month = parseInt(data.month)
+  if (year < 2020 || (year == 2020 && month < 9)) {
+    lblWarning.innerHTML = 'The below Stages have been finished. <br> Please have a look at "Part 6 - 2021" for the upcoming Stages.'
+  } else {
+    lblWarning.innerHTML = ''
+  }
+}
+
 function renderStages (stages) {
   var stagesContainer = document.querySelector('.stages')
   return function (dateObj) {
+    showFinishedWarning({ year: dateObj.year, month: dateObj.month })
     makeStepVisible(2)
     stagesContainer.innerHTML = ''
     var matchingStages = filterByMonth(dateObj.month, dateObj.year, stages)
@@ -265,7 +277,7 @@ function renderMonthsForYear (stages, year) {
     var fullNameMonth = monthToName[months[m]] || months[m]
     makeDateButton(monthContainer, fullNameMonth, (m === 0), {year: year, month: months[m]}, stagerenderer)
     if (m === 0) {
-      stagerenderer({year: year, month: months[m]})
+      stagerenderer({year: year, month: months[0]})
     }
   }
 }
@@ -295,12 +307,6 @@ function calculateStopDates (stages) {
 
 function onYearClicked (data) {
   renderMonthsForYear(data.stages, data.year)
-  var lblWarning = document.querySelector('div.step.s-1 > div.warning')
-  if (parseInt(data.year) < 2020) {
-    lblWarning.innerHTML = 'The below Stages have been finished. <br> Please have a look at May 2020 for the upcoming Stages.'
-  } else {
-    lblWarning.innerHTML = ''
-  }
 }
 
 if (window.location.href.indexOf('/register') >= 0) {
@@ -315,6 +321,8 @@ if (window.location.href.indexOf('/register') >= 0) {
           text = "Part 1/2 - 2019"
         } else if (text === "2020") {
           text = "Part 3 - 2020"
+        } else if (text === "2021") {
+          text = "Part 6 - 2021"
         }
         makeDateButton(yearContainer, text, (years[y] === '2020') , { stages: stages, year: years[y] }, onYearClicked)
       }

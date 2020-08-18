@@ -88,6 +88,9 @@ nav {
             margin-left: 5rem;
             cursor: pointer;
         }
+        &>.menu-social>A {
+          margin: 0 16px;
+        }
         & .hamburger {
             display: inline-block;
             vertical-align: middle;
@@ -214,6 +217,7 @@ footer {
       &>.left>A>img {
         margin-right: 12px;
       }
+      & .menu-social,
       & .register {
         display: none;
       }
