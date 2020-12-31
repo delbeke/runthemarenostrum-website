@@ -324,9 +324,9 @@ if (window.location.href.indexOf('/register') >= 0) {
         } else if (text === "2021") {
           text = "Part 6 - 2021"
         }
-        makeDateButton(yearContainer, text, (years[y] === '2020') , { stages: stages, year: years[y] }, onYearClicked)
+        makeDateButton(yearContainer, text, (years[y] === '2021') , { stages: stages, year: years[y] }, onYearClicked)
       }
-      renderMonthsForYear(stages, years[1])
+      renderMonthsForYear(stages, years[2])
       // (pre)load map
       var start = stages[0].startPos.split(', ')
       var mapContainer = document.querySelector('.map')
