@@ -1,14 +1,16 @@
-const { series, parallel, src, dest, watch } = require('gulp')
-const sass = require('gulp-sass')
-const minifyCSS = require('gulp-csso')
-const concat = require('gulp-concat')
-const sourcemaps = require('gulp-sourcemaps')
-const seq = require('gulp-sequence')
-const connect = require('gulp-connect')
-const imagemin = require('gulp-imagemin')
-const imageResize = require('gulp-image-resize')
-const del = require('del')
-const htmlreplace = require('gulp-html-replace')
+import imagemin from 'gulp-imagemin'
+import gulp from 'gulp'
+import sass from 'sass'
+import GulpSass from 'gulp-sass'
+import minifyCSS from 'gulp-csso'
+import concat from 'gulp-concat'
+import sourcemaps from 'gulp-sourcemaps'
+import connect from 'gulp-connect'
+import del from 'del'
+import htmlreplace from 'gulp-html-replace'
+
+const { series, parallel, src, dest, watch } = gulp
+const gulpSass = GulpSass(sass)
 
 function clean() {
     return del(['build/**/*'])
@@ -31,7 +33,7 @@ function png() {
 }
 
 function html() {
-    return src(['src/*.html', 'src/*.ico'])
+    return src(['src/**/*.html', 'src/*.ico'])
         .pipe(htmlreplace({
             'header': { src: src('src/blocks/header.html') },
             'menu': { src: src('src/blocks/menu.html') },
@@ -42,7 +44,7 @@ function html() {
 
 function css() {
     return src('src/css/*.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(gulpSass().on('error', gulpSass.logError))
         .pipe(minifyCSS())
         .pipe(dest('build/css'))
 }
@@ -97,5 +99,5 @@ function startWatch() {
 
 const startDefault = series(clean, parallel(html, css, js, images, svg, png, maps, fonts, downloads))
 
-exports.watch = startWatch
-exports.default = startDefault
+export { startWatch as watch }
+export default startDefault
