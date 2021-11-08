@@ -1,0 +1,19 @@
+section {
+    font-size: 1.6rem;
+    &.slide {
+        &.hero {
+            height: 50vh;
+            min-height: 450px;
+            color: #ffffff;
+            background-color: #386272;
+            background-image: url(/images/rules.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .container {
+            margin-top: 4rem;
+        }
+    }
+}

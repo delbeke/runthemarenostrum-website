@@ -44,6 +44,10 @@ $breakpoint-large: 1184px;
   float: left;
   margin: 0.5rem 2%;
   min-height: 0.125rem;
+
+  &.center {
+    text-align: center;
+  }
 }
 
 .row::after {
