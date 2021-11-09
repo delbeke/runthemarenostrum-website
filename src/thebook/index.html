@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="/css/grid.css">
   <link rel="stylesheet" type="text/css" href="/css/thebook.css">
   <link rel="stylesheet" type="text/css" href="/css/slider.css">
-
+  <script type='text/javascript' src='//js.stripe.com/v3/'></script>
 </head>
 
 <body>
@@ -77,8 +77,112 @@
           <div style="font-size: 0.8em;">Hardcover, 400-pager, full-colour, 29x24 cm</div>
           <div style="font-size: 1.5em; margin-top: 1em;">44.90 €</div>
           <div style="font-size: 0.8em;">10 days shipping, Excl shipping costs</div>
+          <div style="margin-top: 1em;" class="container">
+            <div class="row">
+              <div class="col-6">
+                <div>Dutch <div class='count-box'>
+                    <div class='count'>
+                      <button onclick="do_count('count_value_nl', -1)">-</button>
+                      <span id="count_value_nl"> 0 </span>
+                      <button onclick="do_count('count_value_nl', 1)">+</button>
+                    </div>
+                  </div>
+                </div>
+                <div>French <div class='count-box'>
+                    <div class='count'>
+                      <button onclick="do_count('count_value_fr', -1)">-</button>
+                      <span id="count_value_fr"> 0 </span>
+                      <button onclick="do_count('count_value_fr', 1)">+</button>
+                    </div>
+                  </div>
+                </div>
+                <div>English <div class='count-box'>
+                    <div class='count'>
+                      <button onclick="do_count('count_value_en', -1)">-</button>
+                      <span id="count_value_en"> 0 </span>
+                      <button onclick="do_count('count_value_en', 1)">+</button>
+                    </div>
+                  </div>
+                </div>
+                <div><input id="btn_buy" type="button" value="Order" disabled class="buy-button" onclick="sent_to_stripe()"></div>
+              </div>
+              <div class="col-6">
+                By default we only ship to European countries. If you like us to ship your book outside of Europe,
+                please contact us.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <script>
+        var el_nl = document.getElementById('count_value_nl')
+        var el_fr = document.getElementById('count_value_fr')
+        var el_en = document.getElementById('count_value_en')
+        var el_buy = document.getElementById('btn_buy')
+
+        function do_count(id, val) {
+          var el = document.getElementById(id)
+          var nval = parseInt(el.innerHTML) + val
+          if (nval >= 0) {
+            el.innerHTML = nval
+          }
+          set_buy_button_state()
+        }
+
+        function set_buy_button_state() {
+          var total = parseInt(el_nl.innerHTML) + parseInt(el_fr.innerHTML) + parseInt(el_en.innerHTML)
+          if (total > 0) {
+            el_buy.disabled = false
+            el_buy.style.cursor = 'pointer'
+            el_buy.style.opacity = 1
+          } else {
+            el_buy.disabled = true
+            el_buy.style.cursor = 'not-allowed'
+            el_buy.style.opacity = 0.5
+          }
+        }
+
+        var stripe = Stripe('pk_live_S2Cdyp0reoeYcSjmNgGgJYKg')
+        function sent_to_stripe () {
+          var line_items = []
+          var cnt_nl = parseInt(el_nl.innerHTML)
+          var cnt_fr = parseInt(el_fr.innerHTML) 
+          var cnt_en = parseInt(el_en.innerHTML)
+
+          if (cnt_nl > 0) {
+            line_items.push({sku: 'BOOK_NL', quantity: cnt_nl})
+          } 
+          if (cnt_fr > 0) {
+            line_items.push({sku: 'BOOK_FR', quantity: cnt_fr})
+          } 
+          if (cnt_en > 0) {
+            line_items.push({sku: 'BOOK_EN', quantity: cnt_en})
+          } 
+
+          // Create a new Checkout Session using our server-side endpoint
+          fetch('https://api.runthemarenostrum.com/book/intent', {
+            method: 'POST',
+            body: JSON.stringify({ line_items: line_items })
+          })
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (session) {
+              return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+              if (result.error) {
+                alert(result.error.message);
+              }
+            })
+            .catch(function (error) {
+              console.error('Error:', error);
+            })
+        }
+
+        set_buy_button_state()
+      </script>
 
       <div class="row center">
         <div class="col-6">

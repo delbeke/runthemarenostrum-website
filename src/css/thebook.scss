@@ -17,3 +17,62 @@ section {
         }
     }
 }
+
+.count-box {
+    margin-bottom: 16px;
+}
+
+.buy-button {
+    color: white;
+    background: #006989;
+    border-radius: 6px;
+    height: 3em;
+    width: 10em;
+}
+
+.count {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto 0 auto;
+    width: 136px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+
+    & > * {
+        position: absolute;
+        outline: solid 1px #bbb;
+        width: 36px;
+        height: 32px;
+    }
+
+    & button {
+        position: absolute;
+        border: none;
+        background-color: white;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:first-child {
+            left: 0;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+
+        &:last-child {
+            left: 100px;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+    }
+
+    & span {
+        margin: 0;
+        width: 64px;
+        left: 37px;
+        vertical-align: middle;
+    }
+}
