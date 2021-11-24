@@ -10,21 +10,23 @@
   <script type='text/javascript' src='//js.stripe.com/v3/'></script>
 </head>
 
-<body>
+<body nohero='true'>
 
   <!-- build:menu -->
   <!-- endbuild -->
 
-  <section class='slide hero'>
-    <div class='left'>
-      <div class='catchphrase'>
-        <div>Register</div>
-      </div>
-    </div>
-  </section>
+  <div class='no-hero-spacer' style="height:70px"></div>
 
   <section class='slide panel'>
     <div class="container">
+
+      <div class="row center">
+        <div class="col-12" style="text-align: center;">
+          <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Follow The Coast</div>
+          <div style="font-size: 1.2em;">the Atlantic coast</div>
+          <div style="font-size: 1em; font-style:italic;">from Knokke to San-Sebastian</div>
+        </div>
+      </div>
       <div class="row center">
         <div class="col-6">
           <!-- Slideshow container -->
@@ -70,47 +72,50 @@
           </div>
         </div>
         <div class="col-6 center">
-          <div style="font-size: 1.5em; font-weight: bold;">Follow The Coast</div>
-          <div style="font-size: 1.2em;">the Atlantic coast</div>
-          <div style="font-size: 1em;">from biarritz to San-Sebastian</div>
           <div style="font-size: 1em; margin-top: 1em;">A visual travel guide along the European Coast</div>
           <div style="font-size: 0.8em;">Hardcover, 400-pager, full-colour, 29x24 cm</div>
-          <div style="font-size: 1.5em; margin-top: 1em;">44.90 €</div>
-          <div style="font-size: 0.8em;">10 days shipping, Excl shipping costs</div>
+          <div style="font-size: 1.5em; margin-top: 0.75em; margin-bottom: 0.25em;">44.90 €</div>
+          <div style="font-size: 0.8em; width:80%; margin:0 auto; font-style:italic;">10 days shipping, Excl shipping
+            costs. Order before the 20th December and get delivered before Christmas.</div>
+
           <div style="margin-top: 1em;" class="container">
-            <div class="row">
-              <div class="col-6">
-                <div>Dutch <div class='count-box'>
-                    <div class='count'>
-                      <button onclick="do_count('count_value_nl', -1)">-</button>
-                      <span id="count_value_nl"> 0 </span>
-                      <button onclick="do_count('count_value_nl', 1)">+</button>
-                    </div>
+
+            <div class="row" style="margin-bottom: 32px">
+              <div class="col-4">Dutch <div class='count-box'>
+                  <div class='count'>
+                    <button onclick="do_count('count_value_nl', -1)">-</button>
+                    <span id="count_value_nl"> 0 </span>
+                    <button onclick="do_count('count_value_nl', 1)">+</button>
                   </div>
                 </div>
-                <div>French <div class='count-box'>
-                    <div class='count'>
-                      <button onclick="do_count('count_value_fr', -1)">-</button>
-                      <span id="count_value_fr"> 0 </span>
-                      <button onclick="do_count('count_value_fr', 1)">+</button>
-                    </div>
-                  </div>
-                </div>
-                <div>English <div class='count-box'>
-                    <div class='count'>
-                      <button onclick="do_count('count_value_en', -1)">-</button>
-                      <span id="count_value_en"> 0 </span>
-                      <button onclick="do_count('count_value_en', 1)">+</button>
-                    </div>
-                  </div>
-                </div>
-                <div><input id="btn_buy" type="button" value="Order" disabled class="buy-button" onclick="sent_to_stripe()"></div>
               </div>
-              <div class="col-6">
+              <div class="col-4">French <div class='count-box'>
+                  <div class='count'>
+                    <button onclick="do_count('count_value_fr', -1)">-</button>
+                    <span id="count_value_fr"> 0 </span>
+                    <button onclick="do_count('count_value_fr', 1)">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">English <div class='count-box'>
+                  <div class='count'>
+                    <button onclick="do_count('count_value_en', -1)">-</button>
+                    <span id="count_value_en"> 0 </span>
+                    <button onclick="do_count('count_value_en', 1)">+</button>
+                  </div>
+                </div>
+              </div>
+              <div><input id="btn_buy" type="button" value="Order" disabled class="buy-button"
+                  onclick="sent_to_stripe()"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12" style="font-size: 0.8em;">
                 By default we only ship to European countries. If you like us to ship your book outside of Europe,
-                please contact us.
+                please contact us at <a href="mailto:info@runthemarenostrum.com">info@runthemarenostrum.com</a>.
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -144,21 +149,21 @@
         }
 
         var stripe = Stripe('pk_live_S2Cdyp0reoeYcSjmNgGgJYKg')
-        function sent_to_stripe () {
+        function sent_to_stripe() {
           var line_items = []
           var cnt_nl = parseInt(el_nl.innerHTML)
-          var cnt_fr = parseInt(el_fr.innerHTML) 
+          var cnt_fr = parseInt(el_fr.innerHTML)
           var cnt_en = parseInt(el_en.innerHTML)
 
           if (cnt_nl > 0) {
-            line_items.push({sku: 'BOOK_NL', quantity: cnt_nl})
-          } 
+            line_items.push({ sku: 'BOOK_NL', quantity: cnt_nl })
+          }
           if (cnt_fr > 0) {
-            line_items.push({sku: 'BOOK_FR', quantity: cnt_fr})
-          } 
+            line_items.push({ sku: 'BOOK_FR', quantity: cnt_fr })
+          }
           if (cnt_en > 0) {
-            line_items.push({sku: 'BOOK_EN', quantity: cnt_en})
-          } 
+            line_items.push({ sku: 'BOOK_EN', quantity: cnt_en })
+          }
 
           // Create a new Checkout Session using our server-side endpoint
           fetch('https://api.runthemarenostrum.com/book/intent', {
@@ -199,7 +204,7 @@
           </p>
         </div>
         <div class="col-6">
-          <img src="/images/book/photo-1.jpg" alt="photo-1">
+          <img src="/images/book/photo-5.jpg" alt="photo-1">
         </div>
       </div>
 
@@ -210,7 +215,7 @@
         <div class="col-6">
           <h2>The book, 'written' by runners</h2>
           <p>
-            We are running running the total coastline of Europe.
+            We are running the total coastline of Europe.
             Every day one team will run another part of the journey a 100km Stage - until we complete the total journey
             close to 100.000km.
           </p>
@@ -297,13 +302,13 @@
           </p>
         </div>
         <div class="col-6">
-          <img src="/images/book/photo-5.jpg" alt="photo-5">
+          <img src="/images/book/photo-6.jpg" alt="photo-5">
         </div>
       </div>
 
       <div class="row center">
         <div class="col-6">
-          <img src="/images/book/photo-6.jpg" alt="photo-6">
+          <img src="/images/book/photo-7.jpg" alt="photo-6">
         </div>
         <div class="col-6">
           <h2>Be a part of the journey</h2>

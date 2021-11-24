@@ -88,6 +88,13 @@ nav {
             margin-left: 5rem;
             cursor: pointer;
         }
+        &>.book {
+          font-size: 1.2em;
+          font-weight: bold;
+          @media only screen and (max-width: 970px) {
+            display: none;
+          }
+        }
         &>.menu-social>A {
           margin: 0 16px;
         }
