@@ -91,7 +91,7 @@ nav {
         &>.book {
           font-size: 1.2em;
           font-weight: bold;
-          @media only screen and (max-width: 970px) {
+          @media only screen and (max-width: 1000px) {
             display: none;
           }
         }
@@ -210,7 +210,7 @@ footer {
   }
 }
 
-@media only screen and (max-width: 768px), screen and (max-height: 450px) {
+@media only screen and (max-width: 785px), screen and (max-height: 450px) {
   html,
   body {
       font-size: 45%;

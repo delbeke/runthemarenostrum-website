@@ -1,5 +1,5 @@
 # runthemarenostrum-website
-Public website for Run The Mare Nostrum
+Public website for Follow the Coast
 
 ## Develop website
 
@@ -8,5 +8,5 @@ Public website for Run The Mare Nostrum
 ## Release website
 
 - Release: `gulp default`
-- Go to `\build\` and run `aws s3 sync . s3://runthemarenostrum  --acl public-read`
+- Go to `\build\` and run `aws s3 sync . s3://runthemarenostrum  --acl public-read --delete --cache-control must-revalidate`
 - Update CloudFront `aws cloudfront create-invalidation --distribution-id EAGO6BHSU5F40 --paths "/*"`
