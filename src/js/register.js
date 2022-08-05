@@ -317,14 +317,7 @@ if (window.location.href.indexOf('/register') >= 0) {
       var yearContainer = document.querySelector('.years')
       for (var y = 0; y < years.length; y++) {
         var text = years[y]
-        if (text === "2019") {
-          text = "Part 1/2 - 2019"
-        } else if (text === "2020") {
-          text = "Part 3 - 2020"
-        } else if (text === "2021") {
-          text = "Part 6 - 2021"
-        }
-        makeDateButton(yearContainer, text, (years[y] === '2022') , { stages: stages, year: years[y] }, onYearClicked)
+        makeDateButton(yearContainer, text, (years[y] === '2023') , { stages: stages, year: years[y] }, onYearClicked)
       }
       renderMonthsForYear(stages, years[3])
       // (pre)load map
