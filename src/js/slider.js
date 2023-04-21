@@ -70,7 +70,9 @@ window.addEventListener('load', function () {
         yDown = null                                          
     }
     
-    slider.addEventListener('touchstart', handleTouchStart, false)
-    slider.addEventListener('touchmove', handleTouchMove, false)
-    showSlides(slideIndex)
+    if (slider) {
+        slider.addEventListener('touchstart', handleTouchStart, false)
+        slider.addEventListener('touchmove', handleTouchMove, false)
+        showSlides(slideIndex)
+    }
 })

@@ -6,14 +6,15 @@ import minifyCSS from 'gulp-csso'
 import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import connect from 'gulp-connect'
-import del from 'del'
 import htmlreplace from 'gulp-html-replace'
+import clean from 'gulp-clean'
 
 const { series, parallel, src, dest, watch } = gulp
 const gulpSass = GulpSass(sass)
 
-function clean() {
-    return del(['build/**/*'])
+function cleanBuild() {
+    return gulp.src('build', {read: false})
+        .pipe(clean())
 }
 
 function images() {
@@ -97,7 +98,7 @@ function startWatch() {
     })
 }
 
-const startDefault = series(clean, parallel(html, css, js, images, svg, png, maps, fonts, downloads))
+const startDefault = series(cleanBuild, parallel(html, css, js, images, svg, png, maps, fonts, downloads))
 
 export { startWatch as watch }
 export default startDefault

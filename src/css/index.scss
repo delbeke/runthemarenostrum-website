@@ -200,12 +200,15 @@ footer {
   & > .footer-sponsor {
     font-size: 1.5rem;
     text-align: center;
+    margin-top: 15px;
     padding: 0 15px 15px 15px;
-    height: 3rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
     & > a > .logo {
-      width: 7rem;
-      vertical-align: text-bottom;
+      height: 25px;
     }
   }
 }
@@ -228,6 +231,15 @@ footer {
       & .register {
         display: none;
       }
+  }
+
+  footer > .footer-sponsor {
+    flex-direction: column;
+    height: unset;
+    
+    & > a > .logo {
+      margin: 10px 0;
+    }
   }
 }
 
