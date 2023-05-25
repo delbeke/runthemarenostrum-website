@@ -317,7 +317,7 @@ if (window.location.href.indexOf('/register') >= 0) {
       var yearContainer = document.querySelector('.years')
       for (var y = 0; y < years.length; y++) {
         var text = years[y]
-        makeDateButton(yearContainer, text, (years[y] === '2023') , { stages: stages, year: years[y] }, onYearClicked)
+        makeDateButton(yearContainer, text, (years[y] === '2024') , { stages: stages, year: years[y] }, onYearClicked)
       }
       renderMonthsForYear(stages, years[3])
       // (pre)load map
