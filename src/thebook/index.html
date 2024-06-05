@@ -19,59 +19,55 @@
 
   <section class='slide panel'>
     <div class="container">
-
       <div class="row center">
-        <div class="col-12" style="text-align: center;">
-          <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Follow The Coast</div>
-          <div style="font-size: 1.2em;">the Atlantic coast</div>
-          <div style="font-size: 1em; font-style:italic;">from Knokke to San-Sebastian</div>
-        </div>
-      </div>
-      <div class="row center">
-        <div class="col-6">
+        <div class="col-6 slideshow-master">
           <!-- Slideshow container -->
           <div class="slideshow-container">
 
             <!-- Full-width images with number and caption text -->
             <div class="mySlides fade">
-              <img src="/images/book/book-1.jpg" style="width:100%" alt="Voorbeeld pagina boek 1">
+              <img src="/images/book/book-1.jpg" style="width:100%" alt="Voorbeeld pagina boek 1" fetchpriority="high">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-2.jpg" style="width:100%" alt="Voorbeeld pagina boek 2">
+              <img src="/images/book/book-2.jpg" style="width:100%" alt="Voorbeeld pagina boek 2" fetchpriority="low">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-3.jpg" style="width:100%" alt="Voorbeeld pagina boek 3">
+              <img src="/images/book/book-3.jpg" style="width:100%" alt="Voorbeeld pagina boek 3" fetchpriority="low">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-4.jpg" style="width:100%" alt="Voorbeeld pagina boek 4">
+              <img src="/images/book/book-4.jpg" style="width:100%" alt="Voorbeeld pagina boek 4" fetchpriority="low">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-5.jpg" style="width:100%" alt="Voorbeeld pagina boek 5">
+              <img src="/images/book/book-5.jpg" style="width:100%" alt="Voorbeeld pagina boek 5" fetchpriority="low">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-6.jpg" style="width:100%" alt="Voorbeeld pagina boek 6">
+              <img src="/images/book/book-6.jpg" style="width:100%" alt="Voorbeeld pagina boek 6" fetchpriority="low">
             </div>
             <div class="mySlides fade">
-              <img src="/images/book/book-7.jpg" style="width:100%" alt="Voorbeeld pagina boek 7">
+              <img src="/images/book/book-7.jpg" style="width:100%" alt="Voorbeeld pagina boek 7" fetchpriority="low">
             </div>
 
             <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
           </div>
 
           <!-- The dots/circles -->
           <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(0)"></span>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
-            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(0, this)"></span>
+            <span class="dot" onclick="currentSlide(1, this)"></span>
+            <span class="dot" onclick="currentSlide(2, this)"></span>
+            <span class="dot" onclick="currentSlide(3, this)"></span>
+            <span class="dot" onclick="currentSlide(4, this)"></span>
+            <span class="dot" onclick="currentSlide(5, this)"></span>
+            <span class="dot" onclick="currentSlide(6, this)"></span>
           </div>
         </div>
         <div class="col-6 center">
+          <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Follow The Coast</div>
+          <div style="font-size: 1.2em;">the Atlantic coast</div>
+          <div style="font-size: 1em; font-style:italic;">from Knokke to San-Sebastian</div>
+
           <div style="font-size: 1em; margin-top: 1em;">A visual travel guide along the European Coast</div>
           <div style="font-size: 0.8em;">Hardcover, 400-pager, full-colour, 29x24 cm</div>
           <div style="font-size: 1.5em; margin-top: 0.75em; margin-bottom: 0.25em;">69 €</div>
@@ -140,13 +136,136 @@
               </div>
             </div>
 
-            <div><input id="btn_buy" type="button" value="Order" disabled class="buy-button"
-                onclick="sent_to_stripe()"></div>
+            <div><input id="btn_buy" type="button" value="Order" disabled class="buy-button" onclick="sent_to_stripe()"></div>
 
             <div class="row">
               <div class="col-12" style="font-size: 0.8em;">
-                By default we only ship to European countries. If you like us to ship your book outside of Europe,
-                please contact us at <a href="mailto:info@runthemarenostrum.com">info@runthemarenostrum.com</a>.
+                Shipping cost is 10 euro to Belgium and 25 euro to all other European countries.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row center">
+        <div class="col-6 slideshow-master">
+          <!-- Slideshow container -->
+          <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+              <img src="/images/book/book2-1.jpg" style="width:100%" alt="Voorbeeld pagina boek 1" fetchpriority="high">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-2.jpg" style="width:100%" alt="Voorbeeld pagina boek 2" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-3.jpg" style="width:100%" alt="Voorbeeld pagina boek 3" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-4.jpg" style="width:100%" alt="Voorbeeld pagina boek 4" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-5.jpg" style="width:100%" alt="Voorbeeld pagina boek 5" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-6.jpg" style="width:100%" alt="Voorbeeld pagina boek 6" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-7.jpg" style="width:100%" alt="Voorbeeld pagina boek 7" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-8.jpg" style="width:100%" alt="Voorbeeld pagina boek 8" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-9.jpg" style="width:100%" alt="Voorbeeld pagina boek 9" fetchpriority="low">
+            </div>
+            <div class="mySlides fade">
+              <img src="/images/book/book2-10.jpg" style="width:100%" alt="Voorbeeld pagina boek 10" fetchpriority="low">
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
+          </div>
+
+          <!-- The dots/circles -->
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(0, this)"></span>
+            <span class="dot" onclick="currentSlide(1, this)"></span>
+            <span class="dot" onclick="currentSlide(2, this)"></span>
+            <span class="dot" onclick="currentSlide(3, this)"></span>
+            <span class="dot" onclick="currentSlide(4, this)"></span>
+            <span class="dot" onclick="currentSlide(5, this)"></span>
+            <span class="dot" onclick="currentSlide(6, this)"></span>
+            <span class="dot" onclick="currentSlide(7, this)"></span>
+            <span class="dot" onclick="currentSlide(8, this)"></span>
+            <span class="dot" onclick="currentSlide(9, this)"></span>
+          </div>
+        </div>
+        <div class="col-6 center">
+          <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;">Canary Islands</div>
+          <div style="font-size: 1.2em;">A Visual Travel Guide</div>
+
+          <div style="font-size: 1em; margin-top: 1em;">Your perfect coffee table book, design object, landscape photo book or travel guide</div>
+          <div style="font-size: 0.8em;">Hardcover, 336-pager, full-colour, 23x28 cm</div>
+          <div style="font-size: 1.5em; margin-top: 0.75em; margin-bottom: 0.25em;">49 €</div>
+          <div style="font-size: 0.8em; width:80%; margin:0 auto; font-style:italic;">Ships within the week, shipping costs excl.</div>
+          <div style="margin-top: 1em;" class="container">
+
+            <div class="row" style="margin-bottom: 8px">
+              <div class="col-6">English <div class='count-box'>
+                  <div class='count'>
+                    <button onclick="do_count('count_value_en2', -1)">-</button>
+                    <span id="count_value_en2"> 0 </span>
+                    <button onclick="do_count('count_value_en2', 1)">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 16px">
+              <div class="col-6" style="font-size: 0.8em;">Country to ship:</div>
+              <div class="col-6">
+                <select name="country" id="sl_country2" style="border-radius: 6px; padding: 5px;">
+                  <option value="AT">Austria</option>
+                  <option value="BE" selected>Belgium</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="CZ">Czechia</option>
+                  <option value="DE">Germany</option>
+                  <option value="DK">Denmark</option>
+                  <option value="EE">Estonia</option>
+                  <option value="ES">Spain</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="GR">Greece</option>
+                  <option value="HR">Croatia</option>
+                  <option value="HU">Hungary</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IT">Italy</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="LV">Latvia</option>
+                  <option value="MT">Malta</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="RO">Romania</option>
+                  <option value="SE">Sweden</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="SK">Slovakia</option>
+                </select>
+              </div>
+            </div>
+
+            <div><input id="btn_buy2" type="button" value="Order" disabled class="buy-button" onclick="sent_to_stripe()"></div>
+
+            <div class="row">
+              <div class="col-12" style="font-size: 0.8em;">
+                Shipping cost is 10 euro to Belgium and 25 euro to all other European countries.
               </div>
             </div>
 
@@ -155,11 +274,25 @@
       </div>
 
       <script>
+        // Book 1
         var el_nl = document.getElementById('count_value_nl')
         var el_fr = document.getElementById('count_value_fr')
         var el_en = document.getElementById('count_value_en')
         var el_buy = document.getElementById('btn_buy')
         var el_country = document.getElementById('sl_country')
+
+        // Book 2
+        var el_en2 = document.getElementById('count_value_en2')
+        var el_buy2 = document.getElementById('btn_buy2')
+        var el_country2 = document.getElementById('sl_country2')
+
+        // keep dropdowns in sync
+        el_country.addEventListener('change', () => {
+          el_country2.value = el_country.value
+        })
+        el_country2.addEventListener('change', () => {
+          el_country.value = el_country2.value
+        })
 
         function do_count(id, val) {
           var el = document.getElementById(id)
@@ -171,24 +304,32 @@
         }
 
         function set_buy_button_state() {
-          var total = parseInt(el_nl.innerHTML) + parseInt(el_fr.innerHTML) + parseInt(el_en.innerHTML)
+          var total = parseInt(el_nl.innerHTML) + parseInt(el_fr.innerHTML) + parseInt(el_en.innerHTML) + parseInt(el_en2.innerHTML)
           if (total > 0) {
             el_buy.disabled = false
             el_buy.style.cursor = 'pointer'
             el_buy.style.opacity = 1
+            el_buy2.disabled = false
+            el_buy2.style.cursor = 'pointer'
+            el_buy2.style.opacity = 1
           } else {
             el_buy.disabled = true
             el_buy.style.cursor = 'not-allowed'
             el_buy.style.opacity = 0.5
+            el_buy2.disabled = true
+            el_buy2.style.cursor = 'not-allowed'
+            el_buy2.style.opacity = 0.5
           }
         }
 
         var stripe = Stripe('pk_live_S2Cdyp0reoeYcSjmNgGgJYKg')
+
         function sent_to_stripe() {
           var line_items = []
           var cnt_nl = parseInt(el_nl.innerHTML)
           var cnt_fr = parseInt(el_fr.innerHTML)
           var cnt_en = parseInt(el_en.innerHTML)
+          var cnt_en2 = parseInt(el_en2.innerHTML)
           var country = el_country.value
 
           if (cnt_nl > 0) {
@@ -199,6 +340,9 @@
           }
           if (cnt_en > 0) {
             line_items.push({ sku: 'BOOK_EN', quantity: cnt_en })
+          }
+          if (cnt_en2 > 0) {
+            line_items.push({ sku: 'BOOK2_EN', quantity: cnt_en2 })
           }
 
           // Create a new Checkout Session using our server-side endpoint
