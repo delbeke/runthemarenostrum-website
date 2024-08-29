@@ -92,7 +92,14 @@ nav {
         &>.book {
           font-size: 1.2em;
           font-weight: bold;
-          @media only screen and (max-width: 1000px) {
+          @media only screen and (max-width: 1020px) {
+            display: none;
+          }
+        }
+        &>.trailcamps {
+          font-size: 1.2em;
+          font-weight: bold;
+          @media only screen and (max-width: 1320px) {
             display: none;
           }
         }
